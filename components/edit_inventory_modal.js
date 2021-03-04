@@ -5,6 +5,7 @@ import Slider from '@react-native-community/slider';
 import { Entypo } from '@expo/vector-icons';
 import { Foundation } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { darkBlue } from '../StyleVars';
 
 const StockModal = ({ hideModal, item, updateItem, deleteItem }) => {
   const [quantity, setQuantity] = useState(item.quantity);
@@ -12,8 +13,8 @@ const StockModal = ({ hideModal, item, updateItem, deleteItem }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={[styles.center, styles.slider]}>
-        <Text style={styles.title}>{item.itemName}</Text>
-        <Text style={styles.quant}>{quantity + '%'}</Text>
+        <Text style={[styles.title, styles.whiteText]}>{item.itemName}</Text>
+        <Text style={[styles.quant, styles.whiteText]}>{quantity + '%'}</Text>
         <Slider
           style={{ width: '100%', height: 60 }}
           minimumValue={0}
@@ -21,8 +22,8 @@ const StockModal = ({ hideModal, item, updateItem, deleteItem }) => {
           tapToSeek={true}
           step={5}
           value={quantity}
-          minimumTrackTintColor="green"
-          maximumTrackTintColor="black"
+          minimumTrackTintColor="#00837b"
+          maximumTrackTintColor={darkBlue}
           onValueChange={(val) => setQuantity(val)}
         />
         <View style={styles.row}>
@@ -31,8 +32,8 @@ const StockModal = ({ hideModal, item, updateItem, deleteItem }) => {
             onPress={() => hideModal()}
           >
             <View style={[styles.center]}>
-              <Entypo name="back" size={34} color="black" />
-              <Text>GoBack</Text>
+              <Entypo name="back" size={34} color={darkBlue} />
+              {/* <Text style={styles.whiteText}>Back</Text> */}
             </View>
           </Pressable>
 
@@ -41,8 +42,12 @@ const StockModal = ({ hideModal, item, updateItem, deleteItem }) => {
             onPress={() => (updateItem(item.itemName, quantity), hideModal())}
           >
             <View style={[styles.center]}>
-              <Ionicons name="checkmark-circle-sharp" size={34} color="green" />
-              <Text>Update</Text>
+              <Ionicons
+                name="checkmark-circle-sharp"
+                size={36}
+                color={darkBlue}
+              />
+              {/* <Text style={styles.whiteText}>Update</Text> */}
             </View>
           </Pressable>
 
@@ -51,8 +56,8 @@ const StockModal = ({ hideModal, item, updateItem, deleteItem }) => {
             onPress={() => (deleteItem(item.itemName), hideModal())}
           >
             <View style={[styles.center]}>
-              <Foundation name="trash" size={34} color="red" />
-              <Text>Delete</Text>
+              <Foundation name="trash" size={34} color={darkBlue} />
+              {/* <Text style={styles.whiteText}>Delete</Text> */}
             </View>
           </Pressable>
         </View>
@@ -61,19 +66,18 @@ const StockModal = ({ hideModal, item, updateItem, deleteItem }) => {
   );
 };
 
+//007f77
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f6e8c7',
+    backgroundColor: '#007e83',
+    opacity: 1,
     borderRadius: 25,
     padding: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.5,
-    shadowRadius: 30,
     width: '90%',
-    height: '30%',
+    height: 250,
     alignItems: 'center',
     justifyContent: 'center',
+    elevation: 20,
   },
   button: {
     height: 50,
@@ -103,6 +107,9 @@ const styles = StyleSheet.create({
   },
   slider: {
     width: '70%',
+  },
+  whiteText: {
+    color: darkBlue,
   },
 });
 

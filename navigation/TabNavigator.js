@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { darkBlue } from '../StyleVars';
 
 import {
   FontAwesome5,
@@ -21,7 +22,7 @@ const BottomTabNavigator = () => {
     <Tab.Navigator
       initialRouteName="Inventory"
       tabBarOptions={{
-        activeTintColor: '#f4511e',
+        activeTintColor: darkBlue,
       }}
     >
       <Tab.Screen

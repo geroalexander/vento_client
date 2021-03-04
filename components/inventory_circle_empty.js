@@ -2,7 +2,7 @@ import React from 'react';
 import ProgressCircle from 'react-native-progress-circle';
 import { View, StyleSheet, Text, FlatList } from 'react-native';
 
-const StockCircleEmpty = () => {
+const InventoryCircleEmpty = () => {
   return (
     <View style={styles.center}>
       <ProgressCircle
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
     paddingBottom: 14,
   },
 });
-export default StockCircleEmpty;
+export default InventoryCircleEmpty;

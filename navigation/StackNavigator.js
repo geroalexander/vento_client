@@ -1,6 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { MaterialIcons } from '@expo/vector-icons';
+import { darkBlue } from '../StyleVars';
+
 import TaskScreen from '../screens/TaskScreen';
 import HomeTasks from '../screens/HomeTasks';
 import HomeInventory from '../screens/HomeInventory';
@@ -11,9 +14,11 @@ const Stack = createStackNavigator();
 
 const screenOptionStyle = {
   headerStyle: {
-    backgroundColor: '#f4511e',
+    backgroundColor: darkBlue,
     height: 90,
   },
+  alignItems: 'center',
+  justifyContent: 'center',
   headerTintColor: '#fff',
   headerBackTitle: 'Back',
 };
@@ -24,7 +29,7 @@ const InventoryStackNavigator = () => {
       <Stack.Screen
         name="Inventory"
         component={HomeInventory}
-        options={{ title: 'My Inventory' }}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
@@ -33,8 +38,16 @@ const InventoryStackNavigator = () => {
 const TasksStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="Roster" component={HomeTasks} />
-      <Stack.Screen name="TaskScreen" component={TaskScreen} />
+      <Stack.Screen
+        name="Roster"
+        component={HomeTasks}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="TaskScreen"
+        component={TaskScreen}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };
@@ -42,7 +55,11 @@ const TasksStackNavigator = () => {
 const UserStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="User" component={HomeUser} />
+      <Stack.Screen
+        name="User"
+        component={HomeUser}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };
@@ -50,7 +67,11 @@ const UserStackNavigator = () => {
 const SettingStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="Setting" component={HomeSetting} />
+      <Stack.Screen
+        name="Setting"
+        component={HomeSetting}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };

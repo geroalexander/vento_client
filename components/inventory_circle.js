@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ProgressCircle from 'react-native-progress-circle';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-const StockCircle = ({ itemName, quantity, onPress }) => {
+const InventoryCircle = ({ itemName, quantity, onPress }) => {
   const color = (quantity) => {
     if (quantity < 35) {
       return 'red';
@@ -43,4 +43,4 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
 });
-export default StockCircle;
+export default InventoryCircle;

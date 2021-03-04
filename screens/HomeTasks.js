@@ -1,28 +1,29 @@
-import React from 'react';
+import * as React from 'react';
 import { View, Button, Text, StyleSheet } from 'react-native';
-import DayOverview from '../components/day_overview';
+import { Appbar } from 'react-native-paper';
+import { darkBlue } from '../StyleVars';
 
 const HomeTasks = ({ navigation }) => {
-  return null;
-};
-<>
-  <DayOverview />
-  {/* <View style={styles.center}>
-        <Text>This is the Roster screen</Text>
-        <Button
-          title="Tasks"
-          onPress={() => navigation.navigate('TaskScreen')}
-        />
-      </View> */}
-</>;
+  const _goBack = () => console.log('Went back');
 
-// const styles = StyleSheet.create({
-//   center: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     textAlign: 'center',
-//   },
-// });
+  const _handleSearch = () => console.log('Searching');
+
+  const _handleMore = () => console.log('Shown more');
+
+  return (
+    <Appbar.Header style={styles.header}>
+      {/* <Appbar.BackAction onPress={_goBack} /> */}
+      <Appbar.Content title="Tasks" />
+      <Appbar.Action icon="magnify" onPress={_handleSearch} />
+      <Appbar.Action icon="dots-vertical" onPress={_handleMore} />
+    </Appbar.Header>
+  );
+};
+
+const styles = StyleSheet.create({
+  header: {
+    backgroundColor: darkBlue,
+  },
+});
 
 export default HomeTasks;
