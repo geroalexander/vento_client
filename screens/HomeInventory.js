@@ -40,15 +40,16 @@ const INVENTORY = [
   //   { itemName: 'Else', quantity: 20 },
   //   { itemName: 'Aswell', quantity: 20 },
   //   { itemName: 'OMG', quantity: 20 },
-  { itemName: 'Running', quantity: 20 },
+  // { itemName: 'Running', quantity: 20 },
 ];
 
 const HomeInventory = ({ navigation }) => {
   const numCols = 3;
 
   const [data, setData] = useState(INVENTORY);
+
   const [editModal, setEditModal] = useState(false);
-  const [addModal, setAddModal] = useState(false);
+  const [addModal, setAddModal] = useState(data.length === 0 ? true : false);
   const [currentItem, setCurrentItem] = useState({});
 
   const updateItem = (name, val) => {
@@ -66,6 +67,7 @@ const HomeInventory = ({ navigation }) => {
         (item) => item.itemName !== name && item.itemName !== 'blank',
       ),
     );
+    data.length === 0 ? setAddModal(true) : setAddModal(false);
   };
 
   const addItem = (name, val) => {
@@ -75,7 +77,6 @@ const HomeInventory = ({ navigation }) => {
       quantity: val,
     };
     setData((data) => [...data, item]);
-    console.log(data);
   };
 
   return (

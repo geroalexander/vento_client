@@ -12,6 +12,7 @@ const StockAddModal = ({ hideModal, addItem }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={[styles.center, styles.slider]}>
+        <Text style={[styles.quant, styles.textColor]}>Add an item</Text>
         <TextInput
           mode="outlined"
           style={[styles.textInput, styles.textColor]}
