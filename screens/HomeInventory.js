@@ -9,29 +9,29 @@ import EditInventoryModal from '../components/inventory/edit_inventory_modal';
 import AddInventoryModal from '../components/inventory/add_inventory_modal';
 
 const INVENTORY = [
-  //   { itemName: 'Beets', quantity: 10 },
-  //   { itemName: 'Oranges', quantity: 10 },
-  //   { itemName: 'Pinapples', quantity: 10 },
-  //   { itemName: 'MushRooms', quantity: 100 },
-  //   { itemName: 'Beef', quantity: 100 },
-  //   { itemName: 'Apples', quantity: 20 },
-  //   { itemName: 'Carrots', quantity: 20 },
-  //   { itemName: 'Leek', quantity: 20 },
-  //   { itemName: 'Onions', quantity: 20 },
-  //   { itemName: 'Garlic', quantity: 20 },
-  //   { itemName: 'Peas', quantity: 20 },
-  //   { itemName: 'Gambas', quantity: 20 },
-  //   { itemName: 'Tomatoes', quantity: 20 },
-  //   { itemName: 'Curry', quantity: 20 },
-  //   { itemName: 'Rice', quantity: 20 },
-  //   { itemName: 'Noodles', quantity: 20 },
-  //   { itemName: 'Cauliflower', quantity: 20 },
-  //   { itemName: 'Chickpeas', quantity: 20 },
-  //   { itemName: 'Something', quantity: 20 },
-  //   { itemName: 'Else', quantity: 20 },
-  //   { itemName: 'Aswell', quantity: 20 },
-  //   { itemName: 'OMG', quantity: 20 },
-  // { itemName: 'Running', quantity: 20 },
+  //   { _id: 01, itemName: 'Oranges', quantity: 10 },
+  //   { _id: 02, itemName: 'Pinapples', quantity: 10 },
+  //   { _id: 03, itemName: 'MushRooms', quantity: 100 },
+  //   { _id: 04, itemName: 'Beef', quantity: 100 },
+  //   { _id: 05, itemName: 'Apples', quantity: 20 },
+  //   { _id: 07, itemName: 'Carrots', quantity: 20 },
+  //   { _id: 08, itemName: 'Leek', quantity: 20 },
+  //   { _id: 09, itemName: 'Onions', quantity: 20 },
+  //   { _id: 10, itemName: 'Garlic', quantity: 20 },
+  //   { _id: 11, itemName: 'Peas', quantity: 20 },
+  //   { _id: 12, itemName: 'Gambas', quantity: 20 },
+  //   { _id: 13, itemName: 'Tomatoes', quantity: 20 },
+  //   { _id: 14, itemName: 'Curry', quantity: 20 },
+  //   { _id: 15, itemName: 'Rice', quantity: 20 },
+  //   { _id: 16, itemName: 'Noodles', quantity: 20 },
+  //   { _id: 17, itemName: 'Beets', quantity: 10 },
+  //   { _id: 18, itemName: 'Cauliflower', quantity: 20 },
+  //   { _id: 19, itemName: 'Chickpeas', quantity: 20 },
+  //   { _id: 21, itemName: 'Something', quantity: 20 },
+  //   { _id: 22, itemName: 'Else', quantity: 20 },
+  //   { _id: 23, itemName: 'Aswell', quantity: 20 },
+  //   { _id: 24, itemName: 'OMG', quantity: 20 },
+  //   { _id: 25, itemName: 'Running', quantity: 20 },
 ];
 
 const HomeInventory = ({ navigation }) => {
@@ -43,6 +43,7 @@ const HomeInventory = ({ navigation }) => {
   const [addModal, setAddModal] = useState(false);
   const [currentItem, setCurrentItem] = useState({});
 
+  // adjust to work with _id
   const updateItem = (name, val) => {
     const copy = [...data];
     copy.forEach((obj) => {
@@ -52,6 +53,7 @@ const HomeInventory = ({ navigation }) => {
     });
   };
 
+  // adjust to work with _id
   const deleteItem = (name) => {
     setData((oldInventory) =>
       oldInventory.filter(
@@ -60,6 +62,7 @@ const HomeInventory = ({ navigation }) => {
     );
   };
 
+  // adjust to work with _id
   const addItem = (name, val) => {
     setData(data.filter((item) => item.itemName !== 'blank'));
     const item = {
@@ -69,7 +72,6 @@ const HomeInventory = ({ navigation }) => {
     setData((oldInventory) => [...oldInventory, item]);
   };
 
-  // console.log(data);
   return (
     <>
       <Appbar.Header style={styles.header}>
@@ -83,6 +85,7 @@ const HomeInventory = ({ navigation }) => {
       <View style={styles.flatListContainer}>
         <FlatList
           data={formatData(data, numCols)}
+          // adjust to work with _id
           keyExtractor={(item) => item.itemName}
           renderItem={({ item }) => {
             if (!item.quantity && item.itemName === 'blank') {
@@ -90,6 +93,7 @@ const HomeInventory = ({ navigation }) => {
             } else {
               return (
                 <InvnetoryCircle
+                  // adjust to work with _id
                   itemName={item.itemName}
                   quantity={item.quantity}
                   onPress={() => {
@@ -140,6 +144,7 @@ const HomeInventory = ({ navigation }) => {
 
 const formatData = (data, numCols) => {
   const numOfFullRows = Math.floor(data.length / numCols);
+  // adjust to work with _id
 
   let numOfElLastRow = data.length - numOfFullRows * numCols;
   while (numOfElLastRow !== numCols && numOfElLastRow !== 0) {

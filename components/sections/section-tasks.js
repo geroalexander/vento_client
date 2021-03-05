@@ -14,6 +14,7 @@ const SectionTasks = ({ taskInfo }) => {
             maxQuantity={item.maxQuantity}
             curQuantity={item.curQuantity}
             completed={item.completed}
+            units={item.units}
           />
         )}
       />
