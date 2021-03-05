@@ -1,48 +1,74 @@
 import React from 'react';
-import { View, StyleSheet, Text, FlatList } from 'react-native';
-import { List, ProgressBar, Colors } from 'react-native-paper';
+import { View, StyleSheet, Text, SafeAreaView } from 'react-native';
 import { darkBlue } from '../../StyleVars';
+import { ProgressBar, Colors } from 'react-native-paper';
 
 const TaskItem = ({ taskName, maxQuantity, curQuantity, completed }) => {
-  const progress = (maxQuantity, curQuantity) => {
-    return curQuantity / maxQuantity;
-  };
+  const progress = curQuantity / maxQuantity;
 
-  const color = (quantity) => {
-    if (quantity < 0.35) {
+  const color = (progress) => {
+    if (progress < 0.35) {
       return Colors.red500;
-    } else if (quantity < 0.75) {
+    } else if (progress < 0.75) {
       return Colors.orange500;
     } else {
       return Colors.green500;
     }
   };
   return (
-    <View style={styles.taskContainer}>
-      <Text>{taskName}</Text>
-      <Text>{curQuantity}</Text>
-      <ProgressBar
-        progress={progress(maxQuantity, curQuantity)}
-        color={color(progress(maxQuantity, curQuantity))}
-        style={{ borderRadius: 20, height: 15, width: '90%' }}
-      />
-      <Text>{maxQuantity}</Text>
-      <Text>{completed.toString()}</Text>
+    <View style={styles.taskItem}>
+      <View style={styles.itemInfo}>
+        <Text style={styles.itemName}>{taskName}</Text>
+        <Text>
+          {curQuantity}/{maxQuantity}
+        </Text>
+      </View>
+      <View style={styles.barContainer}>
+        <ProgressBar
+          style={styles.progressBar}
+          progress={progress}
+          color={color(progress)}
+        />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  taskContainer: {
-    backgroundColor: 'white',
-    marginHorizontal: 30,
-    marginTop: 15,
-    borderRadius: 25,
-    borderColor: 'gray',
-    elevation: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
+  progressBar: {
+    height: 15,
+    borderRadius: 20,
+    width: 220,
+  },
+  taskItem: {
+    margin: 15,
+
+    backgroundColor: '#fff',
+    borderRadius: 7,
+    // alignItems: 'center',
+    padding: 10,
+    // backgroundColor: 'white',
+    elevation: 7,
+    // marginVertical: 10,
+    // marginHorizontal: 30,
+    // justifyContent: 'center',
+    // paddingHorizontal: 20,
+  },
+  itemInfo: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
+    padding: 10,
+  },
+  itemName: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  barContainer: {
+    paddingBottom: 10,
+    paddingLeft: 10,
   },
 });
 
 export default TaskItem;
+//       <ProgressBar progress={progress} color="red" style={styles.progressBar} />

@@ -19,68 +19,68 @@ const SECTIONS = [
     kitchenID: '1234',
     tasks: [
       {
-        taskName: 'Prep Fish',
+        taskName: 'Prep Gambas',
         maxQuantity: 100,
         curQuantity: 20,
         units: null,
         completed: false,
-        _id: '5552',
+        _id: '1111',
       },
       {
         taskName: 'Prep Meat',
         maxQuantity: 30,
-        curQuantity: 30,
+        curQuantity: 10,
         units: null,
         completed: false,
-        _id: '5553',
+        _id: '2222',
       },
       {
         taskName: 'Prep Fish',
-        maxQuantity: 100,
-        curQuantity: 20,
+        maxQuantity: 80,
+        curQuantity: 70,
         units: null,
         completed: false,
-        _id: '5552',
+        _id: '3333',
       },
       {
         taskName: 'Prep Meat',
-        maxQuantity: 30,
+        maxQuantity: 100,
         curQuantity: 30,
         units: null,
         completed: false,
-        _id: '5553',
+        _id: '4444',
       },
       {
         taskName: 'Prep Fish',
-        maxQuantity: 100,
+        maxQuantity: 90,
         curQuantity: 20,
         units: null,
         completed: false,
-        _id: '5552',
+        _id: '6666',
       },
       {
         taskName: 'Prep Meat',
-        maxQuantity: 30,
-        curQuantity: 30,
+        maxQuantity: 40,
+        curQuantity: 20,
         units: null,
         completed: false,
-        _id: '5553',
+        _id: '7777',
       },
       {
         taskName: 'Prep Fish',
-        maxQuantity: 100,
-        curQuantity: 20,
+        maxQuantity: 50,
+        curQuantity: 50,
         units: null,
         completed: false,
-        _id: '5552',
+        _id: '8888',
       },
       {
         taskName: 'Prep Meat',
         maxQuantity: 30,
-        curQuantity: 30,
+        curQuantity: 5,
         units: null,
         completed: false,
-        _id: '5553',
+        _id: '9999',
       },
     ],
     _id: '134124',
@@ -112,7 +112,7 @@ const SECTIONS = [
         curQuantity: 20,
         units: null,
         completed: false,
-        _id: '5554',
+        _id: '0000',
       },
     ],
     _id: '134121',
@@ -135,21 +135,22 @@ const HomeTasks = ({ navigation }) => {
       </Appbar.Header>
       <Container>
         <Tabs
-          style={styles.tabs}
+          // style={styles.tabs}
           tabsContainerStyle={styles.tabs}
           renderTabBar={() => (
             <ScrollableTab
-              style={styles.tabs}
-              tabsContainerStyle={styles.tabs}
+            // style={styles.tabs}
+            // tabsContainerStyle={styles.tabs}
             />
           )}
         >
           {SECTIONS.map((section) => {
             return (
               <Tab
+                key={section._id}
                 heading={section.sectionName}
-                tabStyle={styles.tabs}
-                activeTabStyle={styles.tabs}
+                // tabStyle={styles.tabs}
+                // activeTabStyle={styles.tabs}
               >
                 <SectionTasks taskInfo={section.tasks} />
               </Tab>

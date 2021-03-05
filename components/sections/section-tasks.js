@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, Text, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 import TaskItem from './task-item';
 
 const SectionTasks = ({ taskInfo }) => {
   return (
-    <View style={styles.listContainer}>
+    <View style={styles.taskList}>
       <FlatList
         data={taskInfo}
         keyExtractor={(item) => item._id}
@@ -22,7 +22,17 @@ const SectionTasks = ({ taskInfo }) => {
 };
 
 const styles = StyleSheet.create({
-  listContainer: {},
+  taskList: {},
+  listContainer: {
+    backgroundColor: 'white',
+    marginTop: 15,
+    borderRadius: 25,
+    borderColor: 'gray',
+    elevation: 10,
+  },
+  taskItem: {
+    borderColor: 'black',
+  },
 });
 
 export default SectionTasks;
