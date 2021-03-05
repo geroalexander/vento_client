@@ -135,12 +135,12 @@ const HomeTasks = ({ navigation }) => {
       </Appbar.Header>
       <Container>
         <Tabs
-          // style={styles.tabs}
+          style={styles.tabs}
           tabsContainerStyle={styles.tabs}
           renderTabBar={() => (
             <ScrollableTab
-            // style={styles.tabs}
-            // tabsContainerStyle={styles.tabs}
+              style={styles.tabs}
+              tabsContainerStyle={styles.tabs}
             />
           )}
         >
@@ -149,8 +149,8 @@ const HomeTasks = ({ navigation }) => {
               <Tab
                 key={section._id}
                 heading={section.sectionName}
-                // tabStyle={styles.tabs}
-                // activeTabStyle={styles.tabs}
+                tabStyle={styles.tabs}
+                activeTabStyle={styles.tabs}
               >
                 <SectionTasks taskInfo={section.tasks} />
               </Tab>

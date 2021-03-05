@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { useState } from 'react/cjs/react.development';
 import { TextInput } from 'react-native-paper';
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, Pressable, SafeAreaView } from 'react-native';
 import { darkBlue } from '../../StyleVars';
 import Slider from '@react-native-community/slider';
+import { Entypo } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 const StockAddModal = ({ hideModal, addItem }) => {
   const [newText, setNewText] = useState('');
@@ -14,9 +16,16 @@ const StockAddModal = ({ hideModal, addItem }) => {
       <View style={[styles.center, styles.slider]}>
         <Text style={[styles.quant, styles.textColor]}>Add an item</Text>
         <TextInput
+          theme={{
+            colors: {
+              placeholder: darkBlue,
+              text: darkBlue,
+              primary: darkBlue,
+            },
+          }}
           mode="outlined"
           style={[styles.textInput, styles.textColor]}
-          placeholder={'Enter an item name'}
+          label={'Enter an item'}
           underlineColor={darkBlue}
           sectionColor={darkBlue}
           onChangeText={(text) => setNewText(text)}
@@ -25,17 +34,39 @@ const StockAddModal = ({ hideModal, addItem }) => {
         />
         <Text style={[styles.quant, styles.textColor]}>{quantity + '%'}</Text>
 
-        <Slider
-          style={{ width: '100%', height: 60 }}
-          minimumValue={0}
-          maximumValue={100}
-          tapToSeek={true}
-          step={5}
-          value={quantity}
-          minimumTrackTintColor="#00837b"
-          maximumTrackTintColor={darkBlue}
-          onValueChange={(val) => setQuantity(val)}
-        />
+        <View style={styles.row}>
+          <Pressable
+            style={[styles.center, styles.button]}
+            onPress={() => hideModal()}
+          >
+            <View style={[styles.center]}>
+              <Entypo name="back" size={34} color={darkBlue} />
+            </View>
+          </Pressable>
+          <Slider
+            style={{ width: '100%', height: 60 }}
+            minimumValue={0}
+            maximumValue={100}
+            tapToSeek={true}
+            step={5}
+            value={quantity}
+            minimumTrackTintColor="#00837b"
+            maximumTrackTintColor={darkBlue}
+            onValueChange={(val) => setQuantity(val)}
+          />
+          <Pressable
+            style={[styles.center, styles.button]}
+            onPress={() => (addItem(newText, quantity), hideModal())}
+          >
+            <View style={[styles.center]}>
+              <Ionicons
+                name="checkmark-circle-sharp"
+                size={36}
+                color={darkBlue}
+              />
+            </View>
+          </Pressable>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -69,6 +100,17 @@ const styles = StyleSheet.create({
   },
   textColor: {
     color: darkBlue,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  button: {
+    height: 50,
+    paddingHorizontal: 10,
+    marginHorizontal: 0,
+    borderRadius: 15,
   },
 });
 
