@@ -9,7 +9,7 @@ import {
 } from '@expo/vector-icons';
 
 import {
-  TasksStackNavigator,
+  SectionsStackNavigator,
   InventoryStackNavigator,
   UserStackNavigator,
   SettingStackNavigator,
@@ -20,23 +20,14 @@ const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Inventory"
+      initialRouteName="Sections"
       tabBarOptions={{
         activeTintColor: darkBlue,
       }}
     >
       <Tab.Screen
-        name="Inventory"
-        component={InventoryStackNavigator}
-        options={{
-          tabBarIcon: ({ color }) => {
-            return <FontAwesome5 name="box-open" size={24} color={color} />;
-          },
-        }}
-      />
-      <Tab.Screen
-        name="Tasks"
-        component={TasksStackNavigator}
+        name="Sections"
+        component={SectionsStackNavigator}
         options={{
           tabBarIcon: ({ color }) => {
             return (
@@ -46,6 +37,15 @@ const BottomTabNavigator = () => {
                 color={color}
               />
             );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Inventory"
+        component={InventoryStackNavigator}
+        options={{
+          tabBarIcon: ({ color }) => {
+            return <FontAwesome5 name="box-open" size={24} color={color} />;
           },
         }}
       />

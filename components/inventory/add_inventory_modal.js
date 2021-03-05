@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from 'react/cjs/react.development';
 import { TextInput } from 'react-native-paper';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
-import { darkBlue } from '../StyleVars';
+import { darkBlue } from '../../StyleVars';
 import Slider from '@react-native-community/slider';
 
 const StockAddModal = ({ hideModal, addItem }) => {

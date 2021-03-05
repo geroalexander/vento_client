@@ -6,7 +6,7 @@ import Slider from '@react-native-community/slider';
 import { Entypo } from '@expo/vector-icons';
 import { Foundation } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import { darkBlue } from '../StyleVars';
+import { darkBlue } from '../../StyleVars';
 
 const StockModal = ({ hideModal, item, updateItem, deleteItem }) => {
   const [quantity, setQuantity] = useState(item.quantity);

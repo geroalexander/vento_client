@@ -2,20 +2,11 @@ import * as React from 'react';
 import { useState } from 'react';
 import { darkBlue } from '../StyleVars';
 import { Appbar } from 'react-native-paper';
-import {
-  View,
-  StyleSheet,
-  Text,
-  FlatList,
-  Modal,
-  TouchableOpacity,
-} from 'react-native';
-import InvnetoryCircle from '../components/inventory_circle';
-import InventoryCircleEmpty from '../components/inventory_circle_empty';
-import EditInventoryModal from '../components/edit_inventory_modal';
-import AddInventoryModal from '../components/add_inventory_modal';
-import { MaterialIcons } from '@expo/vector-icons';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { View, StyleSheet, FlatList, Modal } from 'react-native';
+import InvnetoryCircle from '../components/inventory/inventory_circle';
+import InventoryCircleEmpty from '../components/inventory/inventory_circle_empty';
+import EditInventoryModal from '../components/inventory/edit_inventory_modal';
+import AddInventoryModal from '../components/inventory/add_inventory_modal';
 
 const INVENTORY = [
   //   { itemName: 'Beets', quantity: 10 },
@@ -49,7 +40,7 @@ const HomeInventory = ({ navigation }) => {
   const [data, setData] = useState(INVENTORY);
 
   const [editModal, setEditModal] = useState(false);
-  const [addModal, setAddModal] = useState(data.length === 0 ? true : false);
+  const [addModal, setAddModal] = useState(false);
   const [currentItem, setCurrentItem] = useState({});
 
   const updateItem = (name, val) => {
@@ -62,12 +53,11 @@ const HomeInventory = ({ navigation }) => {
   };
 
   const deleteItem = (name) => {
-    setData(
-      data.filter(
+    setData((oldInventory) =>
+      oldInventory.filter(
         (item) => item.itemName !== name && item.itemName !== 'blank',
       ),
     );
-    data.length === 0 ? setAddModal(true) : setAddModal(false);
   };
 
   const addItem = (name, val) => {
@@ -76,9 +66,10 @@ const HomeInventory = ({ navigation }) => {
       itemName: name,
       quantity: val,
     };
-    setData((data) => [...data, item]);
+    setData((oldInventory) => [...oldInventory, item]);
   };
 
+  // console.log(data);
   return (
     <>
       <Appbar.Header style={styles.header}>
