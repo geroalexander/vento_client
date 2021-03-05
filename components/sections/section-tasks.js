@@ -6,7 +6,7 @@ const SectionTasks = ({ taskInfo }) => {
   return (
     <View style={styles.taskList}>
       <FlatList
-        data={taskInfo}
+        data={formatData(taskInfo)}
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
           <TaskItem
@@ -20,6 +20,13 @@ const SectionTasks = ({ taskInfo }) => {
       />
     </View>
   );
+};
+
+const formatData = (taskInfo) => {
+  taskInfo.sort(
+    (a, b) => b.curQuantity / b.maxQuantity - a.curQuantity / a.maxQuantity,
+  );
+  return taskInfo;
 };
 
 const styles = StyleSheet.create({

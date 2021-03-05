@@ -6,7 +6,7 @@ import { Feather } from '@expo/vector-icons';
 import EditTaskModal from './edit_task_modal';
 import CheckBox from '@react-native-community/checkbox';
 
-const TaskItem = ({ taskName, maxQuantity, curQuantity, units }) => {
+const TaskItem = ({ taskName, maxQuantity, curQuantity }) => {
   const [taskModal, setTaskModal] = useState(false);
   const [checked, setChecked] = useState(false);
   const [current, setCurrent] = useState(curQuantity);
@@ -34,7 +34,7 @@ const TaskItem = ({ taskName, maxQuantity, curQuantity, units }) => {
         <View style={styles.itemInfo}>
           <Text style={styles.itemName}>{taskName}</Text>
           <Text style={styles.unit}>
-            {current}/{maxQuantity} {units && units}
+            {current}/{maxQuantity}
           </Text>
         </View>
         <View style={styles.progressEdit}>
@@ -57,11 +57,8 @@ const TaskItem = ({ taskName, maxQuantity, curQuantity, units }) => {
             disabled={false}
             value={checked}
             onValueChange={(newValue) => {
-              if (newValue) {
-                setCurrent(() => maxQuantity);
-              } else {
-                setCurrent(() => curQuantity);
-              }
+              if (newValue) setCurrent(() => maxQuantity);
+              else setCurrent(() => curQuantity);
               setChecked(newValue);
             }}
           />
@@ -80,6 +77,7 @@ const TaskItem = ({ taskName, maxQuantity, curQuantity, units }) => {
               setTaskModal(false);
             }}
             editTask={editTask}
+            task={{ taskName, maxQuantity, current }}
           />
         </View>
       </Modal>
