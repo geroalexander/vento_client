@@ -85,7 +85,7 @@ const HomeInventory = ({ navigation }) => {
           data={formatData(data, numCols)}
           keyExtractor={(item) => item.itemName}
           renderItem={({ item }) => {
-            if (!item.quantity) {
+            if (!item.quantity && item.itemName === 'blank') {
               return <InventoryCircleEmpty />;
             } else {
               return (
