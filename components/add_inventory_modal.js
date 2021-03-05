@@ -1,28 +1,42 @@
 import * as React from 'react';
-import { TextInput } from 'react-native-paper';
-import {
-  View,
-  Text,
-  Alert,
-  StyleSheet,
-  SafeAreaView,
-  Pressable,
-} from 'react-native';
 import { useState } from 'react/cjs/react.development';
+import { TextInput } from 'react-native-paper';
+import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import { darkBlue } from '../StyleVars';
+import Slider from '@react-native-community/slider';
 
-const StockAddModal = ({ addItem, hideModal }) => {
-  const [newItem, setNewItem] = useState({});
+const StockAddModal = ({ hideModal, addItem }) => {
+  const [newText, setNewText] = useState('');
+  const [quantity, setQuantity] = useState(0);
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        mode="outlined"
-        style={styles.textInput}
-        // onChangeText={(text) => setNewItem(text)}
-        value={newItem}
-      />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View style={[styles.center, styles.slider]}>
+        <TextInput
+          mode="outlined"
+          style={[styles.textInput, styles.textColor]}
+          placeholder={'Enter an item name'}
+          underlineColor={darkBlue}
+          sectionColor={darkBlue}
+          onChangeText={(text) => setNewText(text)}
+          value={newText}
+          onSubmitEditing={() => (addItem(newText, quantity), hideModal())}
+        />
+        <Text style={[styles.quant, styles.textColor]}>{quantity + '%'}</Text>
+
+        <Slider
+          style={{ width: '100%', height: 60 }}
+          minimumValue={0}
+          maximumValue={100}
+          tapToSeek={true}
+          step={5}
+          value={quantity}
+          minimumTrackTintColor="#00837b"
+          maximumTrackTintColor={darkBlue}
+          onValueChange={(val) => setQuantity(val)}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
@@ -40,6 +54,20 @@ const styles = StyleSheet.create({
   textInput: {
     height: 50,
     width: '100%',
+  },
+  quant: {
+    fontSize: 40,
+    fontWeight: 'bold',
+  },
+  center: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  slider: {
+    width: '70%',
+  },
+  textColor: {
+    color: darkBlue,
   },
 });
 

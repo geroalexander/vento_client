@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { useState } from 'react';
 import { View, Text, StyleSheet, Pressable, SafeAreaView } from 'react-native';
 import Slider from '@react-native-community/slider';
 
@@ -13,8 +14,8 @@ const StockModal = ({ hideModal, item, updateItem, deleteItem }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={[styles.center, styles.slider]}>
-        <Text style={[styles.title, styles.whiteText]}>{item.itemName}</Text>
-        <Text style={[styles.quant, styles.whiteText]}>{quantity + '%'}</Text>
+        <Text style={[styles.title, styles.textColor]}>{item.itemName}</Text>
+        <Text style={[styles.quant, styles.textColor]}>{quantity + '%'}</Text>
         <Slider
           style={{ width: '100%', height: 60 }}
           minimumValue={0}
@@ -33,7 +34,6 @@ const StockModal = ({ hideModal, item, updateItem, deleteItem }) => {
           >
             <View style={[styles.center]}>
               <Entypo name="back" size={34} color={darkBlue} />
-              {/* <Text style={styles.whiteText}>Back</Text> */}
             </View>
           </Pressable>
 
@@ -47,7 +47,6 @@ const StockModal = ({ hideModal, item, updateItem, deleteItem }) => {
                 size={36}
                 color={darkBlue}
               />
-              {/* <Text style={styles.whiteText}>Update</Text> */}
             </View>
           </Pressable>
 
@@ -57,7 +56,6 @@ const StockModal = ({ hideModal, item, updateItem, deleteItem }) => {
           >
             <View style={[styles.center]}>
               <Foundation name="trash" size={34} color={darkBlue} />
-              {/* <Text style={styles.whiteText}>Delete</Text> */}
             </View>
           </Pressable>
         </View>
@@ -67,9 +65,10 @@ const StockModal = ({ hideModal, item, updateItem, deleteItem }) => {
 };
 
 //007f77
+//007e83
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#007e83',
+    backgroundColor: '#fff',
     opacity: 1,
     borderRadius: 25,
     padding: 20,
@@ -108,7 +107,7 @@ const styles = StyleSheet.create({
   slider: {
     width: '70%',
   },
-  whiteText: {
+  textColor: {
     color: darkBlue,
   },
 });

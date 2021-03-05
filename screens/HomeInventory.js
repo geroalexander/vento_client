@@ -46,9 +46,6 @@ const INVENTORY = [
 const HomeInventory = ({ navigation }) => {
   const numCols = 3;
 
-  const _handleAdd = () => console.log('Searching');
-  const _handleMore = () => console.log('Shown more');
-
   const [data, setData] = useState(INVENTORY);
   const [editModal, setEditModal] = useState(false);
   const [addModal, setAddModal] = useState(false);
@@ -64,11 +61,21 @@ const HomeInventory = ({ navigation }) => {
   };
 
   const deleteItem = (name) => {
-    setData(data.filter((item) => item.itemName !== name));
+    setData(
+      data.filter(
+        (item) => item.itemName !== name && item.itemName !== 'blank',
+      ),
+    );
   };
 
-  const addItem = () => {
-    setData();
+  const addItem = (name, val) => {
+    setData(data.filter((item) => item.itemName !== 'blank'));
+    const item = {
+      itemName: name,
+      quantity: val,
+    };
+    setData((data) => [...data, item]);
+    console.log(data);
   };
 
   return (
@@ -80,14 +87,13 @@ const HomeInventory = ({ navigation }) => {
           onPress={() => setAddModal(true)}
           size={30}
         />
-        <Appbar.Action icon="dots-vertical" onPress={_handleMore} />
       </Appbar.Header>
       <View style={styles.flatListContainer}>
         <FlatList
           data={formatData(data, numCols)}
           keyExtractor={(item) => item.itemName}
           renderItem={({ item }) => {
-            if (item.quantity === false) {
+            if (!item.quantity) {
               return <InventoryCircleEmpty />;
             } else {
               return (
@@ -130,7 +136,10 @@ const HomeInventory = ({ navigation }) => {
         onRequestClose={() => setAddModal(false)}
       >
         <View style={styles.addModal}>
-          <AddInventoryModal hideModal={() => setAddModal(false)} />
+          <AddInventoryModal
+            hideModal={() => setAddModal(false)}
+            addItem={addItem}
+          />
         </View>
       </Modal>
     </>
@@ -142,7 +151,7 @@ const formatData = (data, numCols) => {
 
   let numOfElLastRow = data.length - numOfFullRows * numCols;
   while (numOfElLastRow !== numCols && numOfElLastRow !== 0) {
-    data.push({ itemName: `blank-${numOfElLastRow}`, quantity: false });
+    data.push({ itemName: 'blank' });
     numOfElLastRow = numOfElLastRow + 1;
   }
 
