@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { AppRegistry } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
 import BottomTabNavigator from './navigation/TabNavigator';
@@ -12,4 +12,5 @@ const App = () => {
   );
 };
 
+AppRegistry.registerComponent('vento', () => App);
 export default App;

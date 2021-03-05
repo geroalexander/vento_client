@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Component, useState } from 'react';
 import { View, Button, Text, FlatList, StyleSheet } from 'react-native';
-import SectionView from '../components/sections/section-view';
+import SectionTasks from '../components/sections/section-tasks';
 import { Appbar } from 'react-native-paper';
-import { darkBlue } from '../StyleVars';
+import { darkBlue, midBlue } from '../StyleVars';
 import {
   Container,
   Header,
@@ -24,6 +24,7 @@ const SECTIONS = [
         curQuantity: 20,
         units: null,
         completed: false,
+        _id: '5552',
       },
       {
         taskName: 'Prep Meat',
@@ -31,6 +32,7 @@ const SECTIONS = [
         curQuantity: 20,
         units: null,
         completed: false,
+        _id: '5553',
       },
     ],
     _id: '134124',
@@ -46,6 +48,7 @@ const SECTIONS = [
         curQuantity: 20,
         units: null,
         completed: false,
+        _id: '5555',
       },
     ],
     _id: '134123',
@@ -61,6 +64,7 @@ const SECTIONS = [
         curQuantity: 20,
         units: null,
         completed: false,
+        _id: '5554',
       },
     ],
     _id: '134121',
@@ -99,7 +103,7 @@ const HomeTasks = ({ navigation }) => {
                 tabStyle={styles.tabs}
                 activeTabStyle={styles.tabs}
               >
-                <SectionView taskInfo={section.tasks} />
+                <SectionTasks taskInfo={section.tasks} />
               </Tab>
             );
           })}
@@ -114,7 +118,7 @@ const styles = StyleSheet.create({
     backgroundColor: darkBlue,
   },
   tabs: {
-    backgroundColor: '#004392', //'#00837b',
+    backgroundColor: midBlue,
   },
   red: {
     color: 'red',
