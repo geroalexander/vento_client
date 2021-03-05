@@ -3,18 +3,8 @@ import { View, StyleSheet, Text, FlatList } from 'react-native';
 import TaskItem from './task-item';
 
 const SectionTasks = ({ taskInfo }) => {
-  console.log('----start-------');
-  console.log(typeof taskInfo);
-  console.log(taskInfo);
-  taskInfo.forEach((task) => {
-    console.log(task.taskName);
-  });
-  console.log('-----end------');
-
-  // TODO: Implement rendering of tasks.
-
   return (
-    <View style={styles.list}>
+    <View style={styles.listContainer}>
       <FlatList
         data={taskInfo}
         keyExtractor={(item) => item._id}
@@ -32,9 +22,7 @@ const SectionTasks = ({ taskInfo }) => {
 };
 
 const styles = StyleSheet.create({
-  list: {
-    backgroundColor: 'blue',
-  },
+  listContainer: {},
 });
 
 export default SectionTasks;
