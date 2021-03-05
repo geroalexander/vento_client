@@ -4,12 +4,14 @@ import { darkBlue } from '../../StyleVars';
 import { ProgressBar, Colors } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
 import EditTaskModal from './edit_task_modal';
+import CheckBox from '@react-native-community/checkbox';
 
 const TaskItem = ({ taskName, maxQuantity, curQuantity, units }) => {
   const [taskModal, setTaskModal] = useState(false);
-
+  const [checked, setChecked] = useState(false);
+  const [current, setCurrent] = useState(curQuantity);
   function progress() {
-    return Math.floor((curQuantity / maxQuantity) * 100) / 100;
+    return Math.floor((current / maxQuantity) * 100) / 100;
   }
 
   function color() {
@@ -32,7 +34,7 @@ const TaskItem = ({ taskName, maxQuantity, curQuantity, units }) => {
         <View style={styles.itemInfo}>
           <Text style={styles.itemName}>{taskName}</Text>
           <Text style={styles.unit}>
-            {curQuantity}/{maxQuantity} {units && units}
+            {current}/{maxQuantity} {units && units}
           </Text>
         </View>
         <View style={styles.progressEdit}>
@@ -51,6 +53,18 @@ const TaskItem = ({ taskName, maxQuantity, curQuantity, units }) => {
               color={darkBlue}
             />
           </Pressable>
+          <CheckBox
+            disabled={false}
+            value={checked}
+            onValueChange={(newValue) => {
+              if (newValue) {
+                setCurrent(() => maxQuantity);
+              } else {
+                setCurrent(() => curQuantity);
+              }
+              setChecked(newValue);
+            }}
+          />
         </View>
       </View>
 
@@ -77,7 +91,7 @@ const styles = StyleSheet.create({
   progressBar: {
     height: 15,
     borderRadius: 20,
-    width: 275,
+    width: 235,
   },
   center: {
     justifyContent: 'center',
@@ -95,7 +109,7 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'space-between',
     padding: 5,
-    // backgroundColor: 'red',
+    color: darkBlue,
   },
   itemName: {
     fontSize: 22,
