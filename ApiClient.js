@@ -11,6 +11,13 @@ function getKitchenInventory() {
 // const addItemToInventory = (body) => {
 //   return fetchRequest('');
 // }
+// function postEvent(body) {
+//   return fetchRequest("/events", {
+//     headers: { "Content-Type": "application/json" },
+//     method: "POST",
+//     body: JSON.stringify(body),
+//     id: id,
+//   });
 
 function fetchRequest(path, obj) {
   return fetch(BASE_URL + path, obj)
@@ -20,14 +27,6 @@ function fetchRequest(path, obj) {
       console.log(`err fetching ${path}:`, err);
     });
 }
-
-// function postEvent(body) {
-//   return fetchRequest("/events", {
-//     headers: { "Content-Type": "application/json" },
-//     method: "POST",
-//     body: JSON.stringify(body),
-//     id: id,
-//   });
 
 export default {
   getKitchenInventory,
