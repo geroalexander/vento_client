@@ -9,32 +9,6 @@ import InventoryCircleEmpty from '../components/inventory/inventory_circle_empty
 import EditInventoryModal from '../components/inventory/edit_inventory_modal';
 import AddInventoryModal from '../components/inventory/add_inventory_modal';
 
-// const INVENTORY = [
-//   //   { _id: '01', itemName: 'Oranges', quantity: 10 },
-//   //   { _id: '02', itemName: 'Pinapples', quantity: 10 },
-//   //   { _id: '03', itemName: 'MushRooms', quantity: 100 },
-//   { _id: '04', itemName: 'Beef', quantity: 100 },
-//   { _id: '05', itemName: 'Apples', quantity: 20 },
-//   //   { _id: '07', itemName: 'Carrots', quantity: 20 },
-//   //   { _id: '08', itemName: 'Leek', quantity: 20 },
-//   //   { _id: '09', itemName: 'Onions', quantity: 20 },
-//   //   { _id: '10', itemName: 'Garlic', quantity: 20 },
-//   //   { _id: '11', itemName: 'Peas', quantity: 20 },
-//   //   { _id: '12', itemName: 'Gambas', quantity: 20 },
-//   //   { _id: '13', itemName: 'Tomatoes', quantity: 20 },
-//   //   { _id: '14', itemName: 'Curry', quantity: 20 },
-//   //   { _id: '15', itemName: 'Rice', quantity: 20 },
-//   //   { _id: '16', itemName: 'Noodles', quantity: 20 },
-//   //   { _id: '17', itemName: 'Beets', quantity: 10 },
-//   //   { _id: '18', itemName: 'Cauliflower', quantity: 20 },
-//   //   { _id: '19', itemName: 'Chickpeas', quantity: 20 },
-//   //   { _id: '21', itemName: 'Something', quantity: 20 },
-//   //   { _id: '22', itemName: 'Else', quantity: 20 },
-//   //   { _id: '23', itemName: 'Aswell', quantity: 20 },
-//   //   { _id: '24', itemName: 'OMG', quantity: 20 },
-//   //   { _id: '25', itemName: 'Running', quantity: 20 },
-// ];
-
 const HomeInventory = ({ navigation }) => {
   const [inventory, setInventory] = useState([]);
   const [editModal, setEditModal] = useState(false);
