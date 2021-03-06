@@ -9,7 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { darkBlue } from '../../StyleVars';
 
 const StockModal = ({ hideModal, item, updateItem, deleteItem }) => {
-  const [quantity, setQuantity] = useState(item.quantity);
+  const [quantity, setQuantity] = useState(item.itemQuantity);
 
   return (
     <SafeAreaView style={styles.container}>

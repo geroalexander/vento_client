@@ -1,5 +1,6 @@
+import ApiClient from '../ApiClient.js';
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { darkBlue } from '../StyleVars';
 import { Appbar } from 'react-native-paper';
 import { View, StyleSheet, FlatList, Modal } from 'react-native';
@@ -8,54 +9,61 @@ import InventoryCircleEmpty from '../components/inventory/inventory_circle_empty
 import EditInventoryModal from '../components/inventory/edit_inventory_modal';
 import AddInventoryModal from '../components/inventory/add_inventory_modal';
 
-const INVENTORY = [
-  //   { _id: 01, itemName: 'Oranges', quantity: 10 },
-  //   { _id: 02, itemName: 'Pinapples', quantity: 10 },
-  //   { _id: 03, itemName: 'MushRooms', quantity: 100 },
-  //   { _id: 04, itemName: 'Beef', quantity: 100 },
-  //   { _id: 05, itemName: 'Apples', quantity: 20 },
-  //   { _id: 07, itemName: 'Carrots', quantity: 20 },
-  //   { _id: 08, itemName: 'Leek', quantity: 20 },
-  //   { _id: 09, itemName: 'Onions', quantity: 20 },
-  //   { _id: 10, itemName: 'Garlic', quantity: 20 },
-  //   { _id: 11, itemName: 'Peas', quantity: 20 },
-  //   { _id: 12, itemName: 'Gambas', quantity: 20 },
-  //   { _id: 13, itemName: 'Tomatoes', quantity: 20 },
-  //   { _id: 14, itemName: 'Curry', quantity: 20 },
-  //   { _id: 15, itemName: 'Rice', quantity: 20 },
-  //   { _id: 16, itemName: 'Noodles', quantity: 20 },
-  //   { _id: 17, itemName: 'Beets', quantity: 10 },
-  //   { _id: 18, itemName: 'Cauliflower', quantity: 20 },
-  //   { _id: 19, itemName: 'Chickpeas', quantity: 20 },
-  //   { _id: 21, itemName: 'Something', quantity: 20 },
-  //   { _id: 22, itemName: 'Else', quantity: 20 },
-  //   { _id: 23, itemName: 'Aswell', quantity: 20 },
-  //   { _id: 24, itemName: 'OMG', quantity: 20 },
-  //   { _id: 25, itemName: 'Running', quantity: 20 },
-];
+// const INVENTORY = [
+//   //   { _id: '01', itemName: 'Oranges', quantity: 10 },
+//   //   { _id: '02', itemName: 'Pinapples', quantity: 10 },
+//   //   { _id: '03', itemName: 'MushRooms', quantity: 100 },
+//   { _id: '04', itemName: 'Beef', quantity: 100 },
+//   { _id: '05', itemName: 'Apples', quantity: 20 },
+//   //   { _id: '07', itemName: 'Carrots', quantity: 20 },
+//   //   { _id: '08', itemName: 'Leek', quantity: 20 },
+//   //   { _id: '09', itemName: 'Onions', quantity: 20 },
+//   //   { _id: '10', itemName: 'Garlic', quantity: 20 },
+//   //   { _id: '11', itemName: 'Peas', quantity: 20 },
+//   //   { _id: '12', itemName: 'Gambas', quantity: 20 },
+//   //   { _id: '13', itemName: 'Tomatoes', quantity: 20 },
+//   //   { _id: '14', itemName: 'Curry', quantity: 20 },
+//   //   { _id: '15', itemName: 'Rice', quantity: 20 },
+//   //   { _id: '16', itemName: 'Noodles', quantity: 20 },
+//   //   { _id: '17', itemName: 'Beets', quantity: 10 },
+//   //   { _id: '18', itemName: 'Cauliflower', quantity: 20 },
+//   //   { _id: '19', itemName: 'Chickpeas', quantity: 20 },
+//   //   { _id: '21', itemName: 'Something', quantity: 20 },
+//   //   { _id: '22', itemName: 'Else', quantity: 20 },
+//   //   { _id: '23', itemName: 'Aswell', quantity: 20 },
+//   //   { _id: '24', itemName: 'OMG', quantity: 20 },
+//   //   { _id: '25', itemName: 'Running', quantity: 20 },
+// ];
 
 const HomeInventory = ({ navigation }) => {
-  const numCols = 3;
-
-  const [data, setData] = useState(INVENTORY);
-
+  const [inventory, setInventory] = useState([]);
   const [editModal, setEditModal] = useState(false);
   const [addModal, setAddModal] = useState(false);
   const [currentItem, setCurrentItem] = useState({});
 
+  useEffect(() => {
+    ApiClient.getKitchenInventory().then((data) =>
+      setInventory(data.inventory),
+    );
+  }, []);
+
+  console.log('---', inventory);
+
+  const numCols = 3;
+
   // adjust to work with _id
   const updateItem = (name, val) => {
-    const copy = [...data];
+    const copy = [...inventory];
     copy.forEach((obj) => {
       if (obj.itemName === name) {
-        obj.quantity = val;
+        obj.itemQuantity = val;
       }
     });
   };
 
   // adjust to work with _id
   const deleteItem = (name) => {
-    setData((oldInventory) =>
+    setInventory((oldInventory) =>
       oldInventory.filter(
         (item) => item.itemName !== name && item.itemName !== 'blank',
       ),
@@ -64,12 +72,12 @@ const HomeInventory = ({ navigation }) => {
 
   // adjust to work with _id
   const addItem = (name, val) => {
-    setData(data.filter((item) => item.itemName !== 'blank'));
+    setInventory(inventory.filter((item) => item.itemName !== 'blank'));
     const item = {
       itemName: name,
-      quantity: val,
+      itemQuantity: val,
     };
-    setData((oldInventory) => [...oldInventory, item]);
+    setInventory((oldInventory) => [...oldInventory, item]);
   };
 
   return (
@@ -84,9 +92,9 @@ const HomeInventory = ({ navigation }) => {
       </Appbar.Header>
       <View style={styles.flatListContainer}>
         <FlatList
-          data={formatData(data, numCols)}
+          data={formatData(inventory, numCols)}
           // adjust to work with _id
-          keyExtractor={(item) => item.itemName}
+          keyExtractor={(item) => item._id}
           renderItem={({ item }) => {
             if (!item.quantity && item.itemName === 'blank') {
               return <InventoryCircleEmpty />;
@@ -95,7 +103,7 @@ const HomeInventory = ({ navigation }) => {
                 <InvnetoryCircle
                   // adjust to work with _id
                   itemName={item.itemName}
-                  quantity={item.quantity}
+                  quantity={item.itemQuantity}
                   onPress={() => {
                     setCurrentItem(item);
                     setEditModal(true);
@@ -152,7 +160,7 @@ const formatData = (data, numCols) => {
     numOfElLastRow = numOfElLastRow + 1;
   }
 
-  data.sort((a, b) => b.quantity - a.quantity);
+  data.sort((a, b) => b.itemQuantity - a.itemQuantity);
   return data;
 };
 
