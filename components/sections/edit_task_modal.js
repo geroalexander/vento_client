@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-  Pressable,
-} from 'react-native';
+import { View, StyleSheet, Text, SafeAreaView, Pressable } from 'react-native';
 import { darkBlue } from '../../StyleVars';
 import { Entypo } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';

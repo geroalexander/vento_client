@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component, useState } from 'react';
-import { View, Button, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Button, Modal, Text, FlatList, StyleSheet } from 'react-native';
 import SectionTasks from '../components/sections/section-tasks';
 import { Appbar } from 'react-native-paper';
 import { darkBlue, midBlue } from '../StyleVars';
@@ -12,6 +12,7 @@ import {
   Tabs,
   ScrollableTab,
 } from 'native-base';
+import AddSectionModal from '../components/sections/add_section_modal';
 
 const SECTIONS = [
   {
@@ -122,6 +123,15 @@ const SECTIONS = [
 
 const HomeTasks = ({ navigation }) => {
   const [addModal, setAddModal] = useState(false);
+  const [data, setData] = useState(SECTIONS);
+
+  const addSection = (name) => {
+    const section = {
+      sectionName: name,
+      notes: '',
+    };
+    setData((oldSections) => [...oldSections, section]);
+  };
 
   return (
     <>
@@ -144,7 +154,7 @@ const HomeTasks = ({ navigation }) => {
             />
           )}
         >
-          {SECTIONS.map((section) => {
+          {data.map((section) => {
             return (
               <Tab
                 key={section._id}
@@ -158,6 +168,20 @@ const HomeTasks = ({ navigation }) => {
           })}
         </Tabs>
       </Container>
+
+      <Modal
+        animationType="none"
+        transparent={true}
+        visible={addModal}
+        onRequestClose={() => setAddModal(false)}
+      >
+        <View style={styles.addModal}>
+          <AddSectionModal
+            hideModal={() => setAddModal(false)}
+            addSection={addSection}
+          />
+        </View>
+      </Modal>
     </>
   );
 };
@@ -171,6 +195,12 @@ const styles = StyleSheet.create({
   },
   red: {
     color: 'red',
+  },
+  addModal: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
 });
 

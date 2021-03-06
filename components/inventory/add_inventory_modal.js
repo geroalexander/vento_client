@@ -30,7 +30,10 @@ const StockAddModal = ({ hideModal, addItem }) => {
           sectionColor={darkBlue}
           onChangeText={(text) => setNewText(text)}
           value={newText}
-          onSubmitEditing={() => (addItem(newText, quantity), hideModal())}
+          onSubmitEditing={() => {
+            addItem(newText, quantity);
+            hideModal();
+          }}
         />
         <Text style={[styles.quant, styles.textColor]}>{quantity + '%'}</Text>
 
