@@ -63,10 +63,13 @@ const TaskItem = ({ taskName, maxQuantity, curQuantity }) => {
             disabled={false}
             value={checked}
             onValueChange={(newValue) => {
+              console.log('new Valu', newValue);
               if (newValue) {
+                console.log('-----', curQuantity, maxQuantity);
                 setProgression(1);
                 setCurrent(() => maxQuantity);
               } else {
+                console.log(curQuantity, maxQuantity);
                 setProgression(() => curQuantity / maxQuantity);
                 setCurrent(() => curQuantity);
               }
