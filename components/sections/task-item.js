@@ -25,7 +25,9 @@ const TaskItem = ({ taskName, maxQuantity, curQuantity }) => {
   }
 
   const editTask = () => {
-    () => {};
+    () => {
+      console.log('hello');
+    };
   };
 
   return (
@@ -54,6 +56,7 @@ const TaskItem = ({ taskName, maxQuantity, curQuantity }) => {
             />
           </Pressable>
           <CheckBox
+            style={styles.checkbox}
             disabled={false}
             value={checked}
             onValueChange={(newValue) => {
@@ -107,9 +110,9 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'space-between',
     padding: 5,
-    color: darkBlue,
   },
   itemName: {
+    color: darkBlue,
     fontSize: 22,
     fontWeight: 'bold',
     marginLeft: 6,
@@ -125,6 +128,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   unit: {
+    color: darkBlue,
     paddingVertical: 8,
     paddingHorizontal: 5,
     fontWeight: 'bold',
@@ -132,7 +136,6 @@ const styles = StyleSheet.create({
   },
   edit: {
     marginBottom: 5,
-    marginRight: 10,
   },
   editModal: {
     flex: 1,
@@ -140,7 +143,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'rgba(0,0,0,0.5)',
   },
+  checkbox: {
+    right: 7,
+    bottom: 1,
+  },
 });
 
 export default TaskItem;
-//       <ProgressBar progress={progress} color="red" style={styles.progressBar} />
