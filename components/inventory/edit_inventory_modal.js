@@ -64,13 +64,11 @@ const StockModal = ({ hideModal, item, updateItem, deleteItem }) => {
   );
 };
 
-//007f77
-//007e83
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     opacity: 1,
-    borderRadius: 25,
+    borderRadius: 7,
     padding: 20,
     width: '90%',
     height: 250,

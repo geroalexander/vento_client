@@ -75,7 +75,7 @@ const StockAddModal = ({ hideModal, addItem }) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    borderRadius: 25,
+    borderRadius: 7,
     padding: 20,
     width: '90%',
     height: 250,

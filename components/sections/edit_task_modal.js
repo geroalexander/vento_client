@@ -8,18 +8,12 @@ import {
   Pressable,
 } from 'react-native';
 import { darkBlue } from '../../StyleVars';
-import { FontAwesome5 } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
 
-const EditTaskModal = ({ task }) => {
+const EditTaskModal = ({ task, hideModal, editTask }) => {
   const [quantity, setQuantity] = useState(task.current);
-
-  function increase() {
-    setQuantity((prevQuant) => prevQuant + 1);
-  }
-  function decrease() {
-    setQuantity((prevQuant) => prevQuant + 1);
-  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -29,27 +23,44 @@ const EditTaskModal = ({ task }) => {
           {quantity}/{task.maxQuantity}
         </Text>
       </View>
-      <View style={styles.btn}>
-        <Pressable onPress={decrease} style={styles.clickable}>
-          <FontAwesome5 name="minus" size={34} color={darkBlue} />
-        </Pressable>
-        <View style={styles.adjust}>
-          <Text style={styles.text}>Adjust Quantity</Text>
-          {/* <Slider
-            style={{ width: '100%', height: 60 }}
-            minimumValue={0}
-            maximumValue={task.maxQuantity}
-            tapToSeek={true}
-            step={5}
-            value={quantity}
-            minimumTrackTintColor="#00837b"
-            maximumTrackTintColor={darkBlue}
-            onValueChange={(val) => setQuantity(val)}
-          /> */}
+      <View style={styles.slider}>
+        <View style={styles.buttons}>
+          <Pressable
+            style={[styles.center, styles.button]}
+            onPress={() => hideModal()}
+          >
+            <View style={[styles.center]}>
+              <Entypo name="back" size={34} color={darkBlue} />
+            </View>
+          </Pressable>
+          <Text style={styles.text}>Slide to adjust</Text>
+          <Pressable
+            style={[styles.center, styles.button]}
+            onPress={() => {
+              editTask(quantity);
+              hideModal();
+            }}
+          >
+            <View style={[styles.center]}>
+              <Ionicons
+                name="checkmark-circle-sharp"
+                size={36}
+                color={darkBlue}
+              />
+            </View>
+          </Pressable>
         </View>
-        <Pressable onPress={increase} style={styles.clickable}>
-          <FontAwesome5 name="plus" size={34} color={darkBlue} />
-        </Pressable>
+        <Slider
+          style={{ width: '100%', height: 50 }}
+          minimumValue={0}
+          maximumValue={task.maxQuantity}
+          tapToSeek={true}
+          step={1}
+          value={quantity}
+          minimumTrackTintColor="#00837b"
+          maximumTrackTintColor={darkBlue}
+          onValueChange={(val) => setQuantity(val)}
+        />
       </View>
     </SafeAreaView>
   );
@@ -59,11 +70,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     opacity: 1,
-    borderRadius: 25,
+    borderRadius: 7,
     padding: 20,
     width: '90%',
     height: 250,
-    // alignItems: 'center',
     justifyContent: 'space-between',
     paddingVertical: 45,
     elevation: 20,
@@ -82,22 +92,18 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: darkBlue,
   },
-  btn: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 34,
-  },
-  clickable: {
-    backgroundColor: 'red',
-    // margin: 10,
+  slider: {
+    justifyContent: 'center',
+    paddingTop: 20,
   },
   text: {
     color: darkBlue,
     fontSize: 20,
     alignSelf: 'center',
   },
-  adjust: {
-    // backgroundColor: 'red',
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
 });
 

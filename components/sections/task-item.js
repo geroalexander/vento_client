@@ -5,30 +5,33 @@ import { ProgressBar, Colors } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
 import EditTaskModal from './edit_task_modal';
 import CheckBox from '@react-native-community/checkbox';
+import { useEffect } from 'react';
 
 const TaskItem = ({ taskName, maxQuantity, curQuantity }) => {
   const [taskModal, setTaskModal] = useState(false);
   const [checked, setChecked] = useState(false);
   const [current, setCurrent] = useState(curQuantity);
-  function progress() {
-    return Math.floor((current / maxQuantity) * 100) / 100;
+  const [progression, setProgression] = useState(curQuantity / maxQuantity);
+
+  // useEffect(() => {
+  //   setProgression(() => Math.floor((current / maxQuantity) * 100) / 100);
+  // }, [current]);
+
+  let color;
+  if (progression < 0.3) {
+    color = Colors.red500;
+  } else if (progression < 0.7) {
+    color = Colors.orange500;
+  } else {
+    color = Colors.green500;
   }
 
-  function color() {
-    if (progress() < 0.3) {
-      return Colors.red500;
-    } else if (progress() < 0.7) {
-      return Colors.orange500;
-    } else {
-      return Colors.green500;
-    }
-  }
-
-  const editTask = () => {
-    () => {
-      console.log('hello');
-    };
+  const editTask = (quantity) => {
+    setProgression(quantity / maxQuantity);
+    setCurrent(quantity);
   };
+
+  const handleAdjust = () => {};
 
   return (
     <>
@@ -43,8 +46,8 @@ const TaskItem = ({ taskName, maxQuantity, curQuantity }) => {
           <View style={styles.barContainer}>
             <ProgressBar
               style={styles.progressBar}
-              progress={progress()}
-              color={color()}
+              progress={progression}
+              color={color}
             />
           </View>
           <Pressable onPress={() => setTaskModal(true)}>
@@ -60,8 +63,13 @@ const TaskItem = ({ taskName, maxQuantity, curQuantity }) => {
             disabled={false}
             value={checked}
             onValueChange={(newValue) => {
-              if (newValue) setCurrent(() => maxQuantity);
-              else setCurrent(() => curQuantity);
+              if (newValue) {
+                setProgression(1);
+                setCurrent(() => maxQuantity);
+              } else {
+                setProgression(() => curQuantity / maxQuantity);
+                setCurrent(() => curQuantity);
+              }
               setChecked(newValue);
             }}
           />
@@ -76,9 +84,7 @@ const TaskItem = ({ taskName, maxQuantity, curQuantity }) => {
       >
         <View style={styles.editModal}>
           <EditTaskModal
-            hideModal={() => {
-              setTaskModal(false);
-            }}
+            hideModal={() => setTaskModal(false)}
             editTask={editTask}
             task={{ taskName, maxQuantity, current }}
           />
