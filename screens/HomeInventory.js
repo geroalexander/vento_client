@@ -1,4 +1,4 @@
-import ApiClient from '../ApiClient.js';
+import ApiClient from '../ApiClient';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { darkBlue } from '../StyleVars';
@@ -21,7 +21,7 @@ const HomeInventory = ({ navigation }) => {
     );
   }, []);
 
-  console.log('---', inventory);
+  console.log('--->', inventory);
 
   const numCols = 3;
 

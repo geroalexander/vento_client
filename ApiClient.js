@@ -1,3 +1,4 @@
+// const REACT_APP_BASE_URL = 'http://192.168.1.141:3001';
 const { REACT_APP_BASE_URL } = process.env;
 const userID = '60439995f7687f4485fef0c0'; //_id of admin
 const kitchenID = '604399f6f7687f4485fef0c2';
@@ -10,14 +11,7 @@ function getKitchenInventory() {
 
 // const addItemToInventory = (body) => {
 //   return fetchRequest('');
-// }
-// function postEvent(body) {
-//   return fetchRequest("/events", {
-//     headers: { "Content-Type": "application/json" },
-//     method: "POST",
-//     body: JSON.stringify(body),
-//     id: id,
-//   });
+// };
 
 function fetchRequest(path, obj) {
   return fetch(BASE_URL + path, obj)
@@ -27,6 +21,14 @@ function fetchRequest(path, obj) {
       console.log(`err fetching ${path}:`, err);
     });
 }
+
+// function postEvent(body) {
+//   return fetchRequest("/events", {
+//     headers: { "Content-Type": "application/json" },
+//     method: "POST",
+//     body: JSON.stringify(body),
+//     id: id,
+//   });
 
 export default {
   getKitchenInventory,
