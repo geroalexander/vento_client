@@ -21,8 +21,6 @@ const HomeInventory = ({ navigation }) => {
     );
   }, []);
 
-  console.log('--->', inventory);
-
   const numCols = 3;
 
   // adjust to work with _id

@@ -1,5 +1,5 @@
-// const REACT_APP_BASE_URL = 'http://192.168.1.141:3001';
-const { REACT_APP_BASE_URL } = process.env;
+const REACT_APP_BASE_URL = 'http://192.168.1.141:3001';
+// const { REACT_APP_BASE_URL } = process.env;
 const userID = '60439995f7687f4485fef0c0'; //_id of admin
 const kitchenID = '604399f6f7687f4485fef0c2';
 
@@ -9,9 +9,29 @@ function getKitchenInventory() {
   );
 }
 
-// const addItemToInventory = (body) => {
-//   return fetchRequest('');
-// };
+function getSectionInformation(sectionID) {
+  return fetch(`${REACT_APP_BASE_URL}/section/${sectionID}`).then((res) =>
+    res.json(),
+  );
+}
+
+function getUserData() {
+  return fetch(`${REACT_APP_BASE_URL}/user/${userID}`).then((res) =>
+    res.json(),
+  );
+}
+
+function updateNotes(sectionID, notes) {
+  const requestOptions = {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ sectionID, notes }),
+  };
+  return fetch(
+    `${REACT_APP_BASE_URL}/section/${sectionID}/notes`,
+    requestOptions,
+  ).then((res) => res.json());
+}
 
 function fetchRequest(path, obj) {
   return fetch(BASE_URL + path, obj)
@@ -32,4 +52,7 @@ function fetchRequest(path, obj) {
 
 export default {
   getKitchenInventory,
+  getUserData,
+  getSectionInformation,
+  updateNotes,
 };
