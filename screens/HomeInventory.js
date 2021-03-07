@@ -56,6 +56,14 @@ const HomeInventory = ({ navigation }) => {
     <>
       <Appbar.Header style={styles.header}>
         <Appbar.Content title="Inventory" />
+        {/* <FAB
+            color={darkBlue}
+            backgroundColor="white"
+            style={styles.fab}
+            small={true}
+            icon="plus"
+            onPress={() => setAddModal(true)}
+          /> */}
         <Appbar.Action
           icon="plus-circle"
           onPress={() => setAddModal(true)}

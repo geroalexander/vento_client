@@ -33,26 +33,31 @@ function updateNotes(sectionID, notes) {
   ).then((res) => res.json());
 }
 
-function fetchRequest(path, obj) {
-  return fetch(BASE_URL + path, obj)
-    .then((res) => (res.status < 400 ? res : Promise.reject()))
-    .then((res) => (res.status === 204 ? res : res.json())) //~~~ Stop infinite loop!
-    .catch((err) => {
-      console.log(`err fetching ${path}:`, err);
-    });
+function addSection(kitchenID, userID, sectionName) {
+  const requestOptions = {
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+    body: JSON.stringify(kitchenID, userID, sectionName),
+  };
+  return fetch(
+    `${REACT_APP_BASE_URL}/section/${kitchenID}/${userID}`,
+    requestOptions,
+  ).then((res) => res.json());
 }
 
-// function postEvent(body) {
-//   return fetchRequest("/events", {
-//     headers: { "Content-Type": "application/json" },
-//     method: "POST",
-//     body: JSON.stringify(body),
-//     id: id,
-//   });
+// function fetchRequest(path, obj) {
+//   return fetch(BASE_URL + path, obj)
+//     .then((res) => (res.status < 400 ? res : Promise.reject()))
+//     .then((res) => (res.status === 204 ? res : res.json())) //~~~ Stop infinite loop!
+//     .catch((err) => {
+//       console.log(`err fetching ${path}:`, err);
+//     });
+// }
 
 export default {
   getKitchenInventory,
   getUserData,
   getSectionInformation,
   updateNotes,
+  addSection,
 };

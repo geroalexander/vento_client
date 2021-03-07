@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 import { darkBlue } from '../../StyleVars';
 
-const TaskNotes = ({ info, setAddModal }) => {
+const TaskNotes = ({ info, setNotesModal }) => {
   return (
-    <TouchableOpacity activeOpacity={0.7} onPress={() => setAddModal(true)}>
+    <TouchableOpacity activeOpacity={0.7} onPress={() => setNotesModal(true)}>
       <View style={styles.notes}>
         <Text style={[styles.text, styles.head]}>Notes:</Text>
         <Text style={styles.text}>{info}</Text>

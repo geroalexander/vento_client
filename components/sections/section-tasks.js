@@ -6,15 +6,13 @@ import TaskItem from './task-item';
 import { TextInput, Button } from 'react-native-paper';
 import { darkBlue } from '../../StyleVars';
 import TaskNotes from './task-notes';
-import { useEffect } from 'react/cjs/react.development';
 
 const SectionTasks = ({ section }) => {
-  const [addModal, setAddModal] = useState(false);
+  const [notesModal, setNotesModal] = useState(false);
   const [notes, setNotes] = useState(section.notes);
 
   const handleNotes = () => {
     ApiClient.updateNotes(section._id, notes).then((data) => {
-      // console.log('data---->', data);
       setNotes(data.notes);
     });
   };
@@ -24,7 +22,7 @@ const SectionTasks = ({ section }) => {
       <View style={styles.taskList}>
         <FlatList
           ListHeaderComponent={() => (
-            <TaskNotes setAddModal={setAddModal} info={notes} />
+            <TaskNotes setNotesModal={setNotesModal} info={notes} />
           )}
           data={section.tasks}
           keyExtractor={(item) => item._id}
@@ -42,10 +40,10 @@ const SectionTasks = ({ section }) => {
         <Modal
           animationType="none"
           transparent={true}
-          visible={addModal}
-          onRequestClose={() => setAddModal(false)}
+          visible={notesModal}
+          onRequestClose={() => setNotesModal(false)}
         >
-          <View style={styles.addModal}>
+          <View style={styles.notesModal}>
             <View style={styles.container}>
               <Text style={styles.text}>Notes:</Text>
               <TextInput
@@ -65,7 +63,7 @@ const SectionTasks = ({ section }) => {
                 value={notes}
                 onSubmitEditing={() => {
                   handleNotes();
-                  setAddModal(false);
+                  setNotesModal(false);
                 }}
               />
               <Button
@@ -73,7 +71,7 @@ const SectionTasks = ({ section }) => {
                 mode="contained"
                 onPress={() => {
                   handleNotes();
-                  setAddModal(() => false);
+                  setNotesModal(() => false);
                 }}
               >
                 Save
@@ -107,7 +105,7 @@ const styles = StyleSheet.create({
   taskItem: {
     borderColor: 'black',
   },
-  addModal: {
+  notesModal: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',

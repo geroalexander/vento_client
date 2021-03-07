@@ -3,22 +3,22 @@ import ApiClient from '../ApiClient';
 import { Component, useState } from 'react';
 import { View, Button, Modal, Text, FlatList, StyleSheet } from 'react-native';
 import SectionTasks from '../components/sections/section-tasks';
-import { Appbar } from 'react-native-paper';
-import { darkBlue, midBlue } from '../StyleVars';
 import {
-  Container,
-  Header,
-  Content,
-  Tab,
-  Tabs,
-  ScrollableTab,
-} from 'native-base';
+  Appbar,
+  DefaultTheme,
+  FAB,
+  Portal,
+  Provider,
+} from 'react-native-paper';
+import { darkBlue, midBlue } from '../StyleVars';
+import { Container, Tab, Tabs, ScrollableTab } from 'native-base';
 import AddSectionModal from '../components/sections/add_section_modal';
 import { useEffect } from 'react/cjs/react.development';
 
 const HomeTasks = ({ navigation }) => {
   const [data, setData] = useState([]);
-  const [addModal, setAddModal] = useState(false);
+  const [stationModal, setSectionModal] = useState(false);
+  const [taskModal, setTaskModal] = useState(false);
   const [user, setUser] = useState({});
 
   useEffect(() => {
@@ -32,12 +32,13 @@ const HomeTasks = ({ navigation }) => {
     });
   }, []);
 
+  console.log('-----------', data);
+
   const addSection = (name) => {
     const section = {
       sectionName: name,
       notes: '',
     };
-    //
     setData((oldSections) => [...oldSections, section]);
   };
 
@@ -47,8 +48,13 @@ const HomeTasks = ({ navigation }) => {
         <Appbar.Header style={styles.header}>
           <Appbar.Content title="Sections" />
           <Appbar.Action
-            icon="plus-circle"
-            onPress={() => setAddModal(true)}
+            icon="format-list-bulleted"
+            onPress={() => {}}
+            size={30}
+          />
+          <Appbar.Action
+            icon="text-box"
+            onPress={() => setSectionModal(true)}
             size={30}
           />
         </Appbar.Header>
@@ -82,12 +88,13 @@ const HomeTasks = ({ navigation }) => {
         <Modal
           animationType="none"
           transparent={true}
-          visible={addModal}
-          onRequestClose={() => setAddModal(false)}
+          visible={stationModal}
+          onRequestClose={() => setSectionModal(false)}
         >
-          <View style={styles.addModal}>
+          <View style={styles.stationModal}>
             <AddSectionModal
-              hideModal={() => setAddModal(false)}
+              // section={section}
+              hideModal={() => setSectionModal(false)}
               addSection={addSection}
             />
           </View>
@@ -108,11 +115,15 @@ const styles = StyleSheet.create({
   red: {
     color: 'red',
   },
-  addModal: {
+  stationModal: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  fab: {
+    margin: 10,
+    color: 'white',
   },
 });
 

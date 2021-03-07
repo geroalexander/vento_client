@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, SafeAreaView, Pressable } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
+import ApiClient from '../../ApiClient';
 import { darkBlue } from '../../StyleVars';
 
 const AddSectionModal = ({ addSection, hideModal }) => {
   const [newSection, setNewSection] = useState('');
+
+  // const handleSection = () => {
+  //   ApiClient.addSection(section.kitchenID);
+  // };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -32,6 +37,7 @@ const AddSectionModal = ({ addSection, hideModal }) => {
         mode="contained"
         onPress={() => {
           addSection(newSection);
+          // handleSection();
           hideModal();
         }}
       >
