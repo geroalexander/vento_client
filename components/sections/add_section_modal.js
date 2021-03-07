@@ -4,12 +4,8 @@ import { TextInput, Button } from 'react-native-paper';
 import ApiClient from '../../ApiClient';
 import { darkBlue } from '../../StyleVars';
 
-const AddSectionModal = ({ addSection, hideModal }) => {
+const AddSectionModal = ({ hideModal, handleSection }) => {
   const [newSection, setNewSection] = useState('');
-
-  // const handleSection = () => {
-  //   ApiClient.addSection(section.kitchenID);
-  // };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -22,13 +18,13 @@ const AddSectionModal = ({ addSection, hideModal }) => {
           },
         }}
         mode="outlined"
-        label={'Add a Section to your Kitchen'}
+        label={'Add a section to your kitchen'}
         underlineColor={darkBlue}
         sectionColor={darkBlue}
         onChangeText={(text) => setNewSection(text)}
         value={newSection}
         onSubmitEditing={() => {
-          addSection(newSection);
+          handleSection(newSection);
           hideModal();
         }}
       />
@@ -36,8 +32,7 @@ const AddSectionModal = ({ addSection, hideModal }) => {
         color={darkBlue}
         mode="contained"
         onPress={() => {
-          addSection(newSection);
-          // handleSection();
+          handleSection(newSection);
           hideModal();
         }}
       >

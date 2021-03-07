@@ -4,7 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialIcons } from '@expo/vector-icons';
 import { darkBlue } from '../StyleVars';
 
-import TaskScreen from '../screens/TaskScreen';
 import HomeSections from '../screens/HomeSections';
 import HomeInventory from '../screens/HomeInventory';
 import HomeSetting from '../screens/HomeSetting';
@@ -29,11 +28,6 @@ const SectionsStackNavigator = () => {
       <Stack.Screen
         name="Roster"
         component={HomeSections}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="TaskScreen"
-        component={TaskScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

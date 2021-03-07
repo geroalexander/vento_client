@@ -37,7 +37,7 @@ function addSection(kitchenID, userID, sectionName) {
   const requestOptions = {
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',
-    body: JSON.stringify(kitchenID, userID, sectionName),
+    body: JSON.stringify({ sectionName, kitchenID, userID }),
   };
   return fetch(
     `${REACT_APP_BASE_URL}/section/${kitchenID}/${userID}`,
@@ -45,14 +45,17 @@ function addSection(kitchenID, userID, sectionName) {
   ).then((res) => res.json());
 }
 
-// function fetchRequest(path, obj) {
-//   return fetch(BASE_URL + path, obj)
-//     .then((res) => (res.status < 400 ? res : Promise.reject()))
-//     .then((res) => (res.status === 204 ? res : res.json())) //~~~ Stop infinite loop!
-//     .catch((err) => {
-//       console.log(`err fetching ${path}:`, err);
-//     });
-// }
+function addTask(sectionID, taskName, maxQuantity) {
+  const requestOptions = {
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+    body: JSON.stringify({ sectionID, taskName, maxQuantity }),
+  };
+  return fetch(
+    `${REACT_APP_BASE_URL}/task/${sectionID}`,
+    requestOptions,
+  ).then((res) => res.json());
+}
 
 export default {
   getKitchenInventory,
@@ -60,4 +63,5 @@ export default {
   getSectionInformation,
   updateNotes,
   addSection,
+  addTask,
 };

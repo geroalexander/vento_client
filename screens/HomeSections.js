@@ -13,13 +13,22 @@ import {
 import { darkBlue, midBlue } from '../StyleVars';
 import { Container, Tab, Tabs, ScrollableTab } from 'native-base';
 import AddSectionModal from '../components/sections/add_section_modal';
+import AddTaskModal from '../components/sections/add-task-modal';
 import { useEffect } from 'react/cjs/react.development';
 
 const HomeTasks = ({ navigation }) => {
   const [data, setData] = useState([]);
-  const [stationModal, setSectionModal] = useState(false);
+  const [sectionModal, setSectionModal] = useState(false);
   const [taskModal, setTaskModal] = useState(false);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState([]);
+  const [secID, setSecID] = useState(null);
+
+  useEffect(() => {
+    // setUserID([]);
+    ApiClient.getUserData().then((user) => {
+      setUser(user);
+    });
+  }, []);
 
   useEffect(() => {
     setData([]);
@@ -32,14 +41,16 @@ const HomeTasks = ({ navigation }) => {
     });
   }, []);
 
-  console.log('-----------', data);
+  const handleSection = (newSection) => {
+    ApiClient.addSection(user.kitchenID, user._id, newSection).then((data) => {
+      setData((oldSections) => [...oldSections, data.newSection]);
+    });
+  };
 
-  const addSection = (name) => {
-    const section = {
-      sectionName: name,
-      notes: '',
-    };
-    setData((oldSections) => [...oldSections, section]);
+  const handleTask = (newTask, maxQuant) => {
+    ApiClient.addTask(secID, newTask, maxQuant).then((res) => {
+      setData((oldSections) => [...oldSections, res]);
+    });
   };
 
   if (data) {
@@ -49,7 +60,7 @@ const HomeTasks = ({ navigation }) => {
           <Appbar.Content title="Sections" />
           <Appbar.Action
             icon="format-list-bulleted"
-            onPress={() => {}}
+            onPress={() => setTaskModal(true)}
             size={30}
           />
           <Appbar.Action
@@ -60,6 +71,9 @@ const HomeTasks = ({ navigation }) => {
         </Appbar.Header>
         <Container>
           <Tabs
+            onChangeTab={(tab) => {
+              setSecID(tab.ref.props.children.props.section._id);
+            }}
             style={styles.tabs}
             tabsContainerStyle={styles.tabs}
             renderTabBar={() => (
@@ -70,7 +84,6 @@ const HomeTasks = ({ navigation }) => {
             )}
           >
             {data.map((section) => {
-              // console.log('---------'.section);
               return (
                 <Tab
                   key={section._id}
@@ -88,14 +101,26 @@ const HomeTasks = ({ navigation }) => {
         <Modal
           animationType="none"
           transparent={true}
-          visible={stationModal}
+          visible={sectionModal}
           onRequestClose={() => setSectionModal(false)}
         >
-          <View style={styles.stationModal}>
+          <View style={styles.sectionModal}>
             <AddSectionModal
-              // section={section}
+              handleSection={handleSection}
               hideModal={() => setSectionModal(false)}
-              addSection={addSection}
+            />
+          </View>
+        </Modal>
+        <Modal
+          animationType="none"
+          transparent={true}
+          visible={taskModal}
+          onRequestClose={() => setTaskModal(false)}
+        >
+          <View style={styles.sectionModal}>
+            <AddTaskModal
+              handleTask={handleTask}
+              hideModal={() => setTaskModal(false)}
             />
           </View>
         </Modal>
@@ -115,7 +140,7 @@ const styles = StyleSheet.create({
   red: {
     color: 'red',
   },
-  stationModal: {
+  sectionModal: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
