@@ -1,5 +1,5 @@
-const REACT_APP_BASE_URL = 'http://192.168.1.141:3001';
-// const { REACT_APP_BASE_URL } = process.env;
+import { REACT_APP_BASE_URL } from '@env';
+
 const userID = '60439995f7687f4485fef0c0'; //_id of admin
 const kitchenID = '604399f6f7687f4485fef0c2';
 

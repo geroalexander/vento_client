@@ -2,20 +2,16 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Text, Modal, Pressable } from 'react-native';
 import { darkBlue } from '../../StyleVars';
 import { ProgressBar, Colors } from 'react-native-paper';
-import { Feather } from '@expo/vector-icons';
 import EditTaskModal from './edit_task_modal';
 import CheckBox from '@react-native-community/checkbox';
 import { useEffect } from 'react';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const TaskItem = ({ taskName, maxQuantity, curQuantity }) => {
   const [taskModal, setTaskModal] = useState(false);
   const [checked, setChecked] = useState(false);
   const [current, setCurrent] = useState(curQuantity);
   const [progression, setProgression] = useState(curQuantity / maxQuantity);
-
-  // useEffect(() => {
-  //   setProgression(() => Math.floor((current / maxQuantity) * 100) / 100);
-  // }, [current]);
 
   let color;
   if (progression < 0.3) {
@@ -36,45 +32,45 @@ const TaskItem = ({ taskName, maxQuantity, curQuantity }) => {
   return (
     <>
       <View style={styles.taskItem}>
-        <View style={styles.itemInfo}>
-          <Text style={styles.itemName}>{taskName}</Text>
-          <Text style={styles.unit}>
-            {current}/{maxQuantity}
-          </Text>
-        </View>
-        <View style={styles.progressEdit}>
-          <View style={styles.barContainer}>
-            <ProgressBar
-              style={styles.progressBar}
-              progress={progression}
-              color={color}
-            />
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={() => setTaskModal(true)}
+        >
+          <View style={styles.stats}>
+            <View style={styles.itemInfo}>
+              <Text style={styles.itemName}>{taskName}</Text>
+              <Text style={styles.unit}>
+                {current}/{maxQuantity}
+              </Text>
+            </View>
+            <View style={styles.progressEdit}>
+              <View style={styles.barContainer}>
+                <ProgressBar
+                  style={styles.progressBar}
+                  progress={progression}
+                  color={color}
+                />
+              </View>
+            </View>
           </View>
-          <Pressable onPress={() => setTaskModal(true)}>
-            <Feather
-              style={styles.edit}
-              name="edit"
-              size={28}
-              color={darkBlue}
-            />
-          </Pressable>
-          <CheckBox
-            style={styles.checkbox}
-            disabled={false}
-            value={checked}
-            onValueChange={(newValue) => {
-              console.log('new Valu', newValue);
-              if (newValue) {
-                setProgression(1);
-                setCurrent(() => maxQuantity);
-              } else {
-                setProgression(() => curQuantity / maxQuantity);
-                setCurrent(() => curQuantity);
-              }
-              setChecked(newValue);
-            }}
-          />
-        </View>
+        </TouchableOpacity>
+
+        <CheckBox
+          style={styles.checkbox}
+          disabled={false}
+          value={checked}
+          onValueChange={(newValue) => {
+            console.log('new Valu', newValue);
+            if (newValue) {
+              setProgression(1);
+              setCurrent(() => maxQuantity);
+            } else {
+              setProgression(() => curQuantity / maxQuantity);
+              setCurrent(() => curQuantity);
+            }
+            setChecked(newValue);
+          }}
+        />
       </View>
 
       <Modal
@@ -99,7 +95,10 @@ const styles = StyleSheet.create({
   progressBar: {
     height: 15,
     borderRadius: 20,
-    width: 235,
+    width: 270,
+  },
+  stats: {
+    width: 290,
   },
   center: {
     justifyContent: 'center',
@@ -111,10 +110,12 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     padding: 10,
     elevation: 7,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
   itemInfo: {
     flexDirection: 'row',
-    width: '100%',
+    // width: '100%',
     justifyContent: 'space-between',
     padding: 5,
   },
@@ -151,8 +152,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)',
   },
   checkbox: {
-    right: 7,
-    bottom: 1,
+    right: 3,
+    bottom: 3,
+    alignSelf: 'flex-end',
+    zIndex: 10,
   },
 });
 

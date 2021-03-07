@@ -12,6 +12,7 @@ const TaskNotes = ({ info, setAddModal }) => {
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={() => setAddModal(true)}>
       <View style={styles.notes}>
+        <Text style={[styles.text, styles.head]}>Notes:</Text>
         <Text style={styles.text}>{info}</Text>
       </View>
     </TouchableOpacity>
@@ -32,6 +33,10 @@ const styles = StyleSheet.create({
   text: {
     color: darkBlue,
     fontSize: 18,
+  },
+  head: {
+    fontWeight: 'bold',
+    alignSelf: 'flex-start',
   },
 });
 

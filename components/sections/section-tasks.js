@@ -23,7 +23,7 @@ const SectionTasks = ({ section }) => {
     return (
       <View style={styles.taskList}>
         <FlatList
-          ListFooterComponent={() => (
+          ListHeaderComponent={() => (
             <TaskNotes setAddModal={setAddModal} info={notes} />
           )}
           data={section.tasks}
@@ -56,7 +56,6 @@ const SectionTasks = ({ section }) => {
                     primary: darkBlue,
                   },
                 }}
-                style={{ height: 120, marginVertical: 20 }}
                 mode="outlined"
                 label={'Add notes'}
                 multiline={true}
