@@ -54,8 +54,8 @@ function addSection(kitchenID, userID, sectionName) {
 function addTask(sectionID, taskName, maxQuantity) {
   const requestOptions = {
     headers: { 'Content-Type': 'application/json' },
-    method: 'POST',
-    body: JSON.stringify({ sectionID, taskName, maxQuantity }),
+    method: 'PUT',
+    body: JSON.stringify({ taskName, maxQuantity }),
   };
   return fetch(
     `${REACT_APP_BASE_URL}/task/${sectionID}`,

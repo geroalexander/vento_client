@@ -16,7 +16,7 @@ import AddSectionModal from '../components/sections/add_section_modal';
 import AddTaskModal from '../components/sections/add-task-modal';
 import { useEffect } from 'react/cjs/react.development';
 
-const HomeTasks = ({ navigation }) => {
+const HomeTasks = () => {
   const [data, setData] = useState([]);
   const [sectionModal, setSectionModal] = useState(false);
   const [taskModal, setTaskModal] = useState(false);
@@ -24,20 +24,18 @@ const HomeTasks = ({ navigation }) => {
   const [secID, setSecID] = useState(null);
 
   useEffect(() => {
-    // setUserID([]);
-    ApiClient.getUserData().then((user) => {
-      setUser(user);
-    });
-  }, []);
-
-  useEffect(() => {
     setData([]);
     ApiClient.getUserData().then((user) => {
+      setUser(user);
       user.sectionID.forEach((section) => {
         ApiClient.getSectionInformation(section).then((newSection) =>
           setData((oldSections) => [...oldSections, newSection]),
         );
       });
+      // console.log('data---->', data);
+      if (data) setSecID(data[0]._id);
+
+      // console.log('secID.......', secID);
     });
   }, []);
 
@@ -45,18 +43,29 @@ const HomeTasks = ({ navigation }) => {
     ApiClient.addSection(user.kitchenID, user._id, newSection).then((data) => {
       setData((oldSections) => [...oldSections, data.newSection]);
     });
+    if (data.length === 1) setSecID(data[0]._id);
   };
 
   const handleTask = (newTask, maxQuant) => {
-    // console.log('--------------', newTask);
-    // console.log('--------------', maxQuant);
-    // console.log('--------------', secID);
-    // console.log('data-----------------------------------', data);
-    // console.log('---------------------------------------');
+    console.log('secID', secID);
     ApiClient.addTask(secID, newTask, maxQuant).then((res) => {
-      setData((oldSections) => [...oldSections, res.tasks]);
+      // console.log('-------->THIS IS RES!!!!!!!!!!!!!', res);
+      const dataCopy = [...data];
+      const updatedData = dataCopy.map((s) => {
+        if (s._id === secID) {
+          // console.log('s---->', s);
+
+          s.tasks = res;
+        }
+        // console.log('s---->', s);
+
+        return s;
+      });
+      setData(updatedData);
+      // console.log('---------data', data);
     });
   };
+  // console.log('secID---->', secID);
 
   if (data) {
     return (
@@ -78,18 +87,19 @@ const HomeTasks = ({ navigation }) => {
           <Tabs
             onChangeTab={(tab) => {
               setSecID(tab.ref.props.children.props.section._id);
-              // console.log(tab.ref.props.children.props);
             }}
             style={styles.tabs}
             tabsContainerStyle={styles.tabs}
             renderTabBar={() => (
               <ScrollableTab
                 style={styles.tabs}
-                tabsContainerStyle={styles.tabs}
+                // tabsContainerStyle={styles.tabs}
               />
             )}
           >
             {data.map((section) => {
+              // console.log('section---->', section);
+
               return (
                 <Tab
                   key={section._id}

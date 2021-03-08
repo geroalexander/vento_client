@@ -7,10 +7,8 @@ import { Checkbox } from 'react-native-paper';
 
 const UserModal = ({ user }) => {
   const section = [
-    '604511798bfaf58c227e4f5a',
-    '604510c58bfaf58c227e4f57',
-    '6045116c8bfaf58c227e4f59',
-    '60450bc88bfaf58c227e4f56',
+    { _id: '6045ef40bbabddad9f882ebe', sectionName: 'Grill' },
+    { _id: '6045ef5bbbabddad9f882ebf', sectionName: 'Fryer' },
   ];
 
   const [checked, setChecked] = useState(false);
@@ -19,6 +17,23 @@ const UserModal = ({ user }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.center}>
         <Text style={styles.text}>Select {user}'s sections</Text>
+        <View style={styles.flatlist}>
+          <FlatList
+            data={section}
+            keyExtractor={(item) => item._id}
+            renderItem={({ item }) => (
+              <View style={styles.sectionCheck}>
+                <Checkbox
+                  status={checked ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    setChecked(!checked);
+                  }}
+                />
+                <Text>{item.sectionName}</Text>
+              </View>
+            )}
+          />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -43,6 +58,14 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     fontWeight: 'bold',
+  },
+  sectionCheck: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  flatlist: {
+    width: '90%',
+    justifyContent: 'space-between',
   },
 });
 

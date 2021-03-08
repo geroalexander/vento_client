@@ -82,22 +82,22 @@ const UserStackNavigator = () => {
   );
 };
 
-const SettingStackNavigator = () => {
-  return (
-    <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen
-        name="Setting"
-        component={HomeSetting}
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
-  );
-};
+// const SettingStackNavigator = () => {
+//   return (
+//     <Stack.Navigator screenOptions={screenOptionStyle}>
+//       <Stack.Screen
+//         name="Setting"
+//         component={HomeSetting}
+//         options={{ headerShown: false }}
+//       />
+//     </Stack.Navigator>
+//   );
+// };
 
 export {
   SectionsStackNavigator,
   InventoryStackNavigator,
   UserStackNavigator,
-  SettingStackNavigator,
+  // SettingStackNavigator,
   LogInStack,
 };

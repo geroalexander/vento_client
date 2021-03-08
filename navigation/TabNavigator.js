@@ -58,7 +58,7 @@ const BottomTabNavigator = () => {
           },
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Setting"
         component={SettingStackNavigator}
         options={{
@@ -66,7 +66,7 @@ const BottomTabNavigator = () => {
             return <FontAwesome name="cog" size={24} color={color} />;
           },
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };
