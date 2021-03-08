@@ -50,11 +50,11 @@ function createNewKitchen(userID, kitchenName) {
   ).then((res) => res.json());
 }
 
-function createNewEmployee(name, email, password, kitchenID) {
+function createNewEmployee(email, name, password, kitchenID) {
   const requestOptions = {
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',
-    body: JSON.stringify({ name, email, password, kitchenID }),
+    body: JSON.stringify({ email, name, password, kitchenID }),
   };
   return fetch(
     `${REACT_APP_BASE_URL}/user/kitchen`,

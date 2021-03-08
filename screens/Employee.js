@@ -1,114 +1,151 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, SafeAreaView } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  SafeAreaView,
+  Image,
+  Text,
+  KeyboardAvoidingView,
+} from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import { darkBlue } from '../StyleVars';
 import ApiClient from '../ApiClient';
+import logo from '../assets/logo.png';
+import AppLoading from 'expo-app-loading';
+import {
+  useFonts,
+  ChakraPetch_300Light,
+  ChakraPetch_300Light_Italic,
+  ChakraPetch_500Medium,
+  ChakraPetch_500Medium_Italic,
+  ChakraPetch_700Bold,
+  ChakraPetch_700Bold_Italic,
+} from '@expo-google-fonts/chakra-petch';
 
 const Employee = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-  const [restaurant, setRestaurant] = useState('');
+  const [kitchenID, setKitchenID] = useState('');
 
   const [user, setUser] = useState({});
+  let [fontsLoaded] = useFonts({
+    ChakraPetch_300Light,
+    ChakraPetch_300Light_Italic,
+    ChakraPetch_500Medium,
+    ChakraPetch_500Medium_Italic,
+    ChakraPetch_700Bold,
+    ChakraPetch_700Bold_Italic,
+  });
 
-  const createUser = (email, name, password) => {
-    ApiClient.createNewEmployee(email, name, password).then((data) => {
-      setUser(data);
-    });
-  };
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    const createUser = (email, name, password, kitchenID) => {
+      console.log('name----->', name);
+      console.log('email----->', email);
+      console.log('password----->', password);
+      console.log('kitchenID----->', kitchenID);
+      ApiClient.createNewEmployee(email, name, password, kitchenID).then(
+        (data) => {
+          console.log(data);
+        },
+      );
+    };
 
-  return (
-    <SafeAreaView style={styles.back}>
-      <View style={styles.container}>
-        <TextInput
-          theme={{
-            colors: {
-              placeholder: darkBlue,
-              text: darkBlue,
-              primary: darkBlue,
-            },
-          }}
-          mode="outlined"
-          label={'enter your email'}
-          underlineColor={darkBlue}
-          sectionColor={darkBlue}
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-        />
-        <TextInput
-          style={styles.textBox}
-          theme={{
-            colors: {
-              placeholder: darkBlue,
-              text: darkBlue,
-              primary: darkBlue,
-            },
-          }}
-          mode="outlined"
-          label={'enter your name'}
-          underlineColor={darkBlue}
-          sectionColor={darkBlue}
-          onChangeText={(text) => setName(text)}
-          value={name}
-        />
-        <TextInput
-          style={styles.textBox}
-          theme={{
-            colors: {
-              placeholder: darkBlue,
-              text: darkBlue,
-              primary: darkBlue,
-            },
-          }}
-          mode="outlined"
-          label={'create your password'}
-          underlineColor={darkBlue}
-          sectionColor={darkBlue}
-          onChangeText={(text) => setPassword(text)}
-          value={password}
-          secureTextEntry={true}
-        />
-        <TextInput
-          style={styles.textBox}
-          theme={{
-            colors: {
-              placeholder: darkBlue,
-              text: darkBlue,
-              primary: darkBlue,
-            },
-          }}
-          mode="outlined"
-          label={'enter your restaurant or kitchen name'}
-          underlineColor={darkBlue}
-          sectionColor={darkBlue}
-          onChangeText={(text) => setRestaurant(text)}
-          value={restaurant}
-        />
-        <View style={styles.btn}>
-          <Button
-            color={darkBlue}
-            mode="contained"
-            onPress={() => createUser(email, name, password)}
-          >
-            Create Account!
-          </Button>
+    return (
+      <SafeAreaView style={styles.back}>
+        <View style={styles.container}>
+          <Text style={styles.text}>REGISTER</Text>
+
+          <TextInput
+            theme={{
+              colors: {
+                placeholder: darkBlue,
+                text: darkBlue,
+                primary: darkBlue,
+              },
+            }}
+            mode="outlined"
+            label={'Enter your email'}
+            underlineColor={darkBlue}
+            sectionColor={darkBlue}
+            onChangeText={(text) => setEmail(text)}
+            value={email}
+          />
+          <TextInput
+            style={styles.textBox}
+            theme={{
+              colors: {
+                placeholder: darkBlue,
+                text: darkBlue,
+                primary: darkBlue,
+              },
+            }}
+            mode="outlined"
+            label={'Enter your name'}
+            underlineColor={darkBlue}
+            sectionColor={darkBlue}
+            onChangeText={(text) => setName(text)}
+            value={name}
+          />
+          <TextInput
+            style={styles.textBox}
+            theme={{
+              colors: {
+                placeholder: darkBlue,
+                text: darkBlue,
+                primary: darkBlue,
+              },
+            }}
+            mode="outlined"
+            label={'Create your password'}
+            underlineColor={darkBlue}
+            sectionColor={darkBlue}
+            onChangeText={(text) => setPassword(text)}
+            value={password}
+            secureTextEntry={true}
+          />
+          <TextInput
+            style={styles.textBox}
+            theme={{
+              colors: {
+                placeholder: darkBlue,
+                text: darkBlue,
+                primary: darkBlue,
+              },
+            }}
+            mode="outlined"
+            label={'Enter your kitchenID'}
+            underlineColor={darkBlue}
+            sectionColor={darkBlue}
+            onChangeText={(text) => setKitchenID(text)}
+            value={kitchenID}
+          />
+          <View style={styles.btn}>
+            <Button
+              color={darkBlue}
+              mode="contained"
+              onPress={() => createUser(email, name, password, kitchenID)}
+            >
+              Create Account!
+            </Button>
+          </View>
+          <Image source={logo} style={styles.logo} />
         </View>
-      </View>
-    </SafeAreaView>
-  );
+      </SafeAreaView>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: '98%',
     backgroundColor: '#fff',
     opacity: 1,
     borderRadius: 7,
     padding: 20,
     elevation: 20,
-    margin: 20,
-    width: '90%',
+    flex: 1,
   },
   btn: {
     // paddingHorizontal: 60,
@@ -116,11 +153,24 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   textBox: {
-    paddingTop: 30,
+    paddingTop: 10,
   },
   back: {
     justifyContent: 'center',
     flex: 1,
+  },
+  logo: {
+    width: 150,
+    height: 150,
+    alignSelf: 'center',
+    marginTop: 25,
+  },
+  text: {
+    fontFamily: 'ChakraPetch_700Bold',
+    fontSize: 50,
+    color: darkBlue,
+    alignSelf: 'center',
+    paddingTop: 30,
   },
 });
 

@@ -30,17 +30,17 @@ const LogInStack = () => {
       <Stack.Screen
         name="Employee or Owner"
         component={Select}
-        options={{ headerShow: false }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Admin"
         component={Admin}
-        options={{ headerShow: false }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Employee"
         component={Employee}
-        options={{ headerShow: false }}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

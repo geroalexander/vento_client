@@ -4,18 +4,21 @@ import { AppRegistry } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { LogInStack } from './navigation/StackNavigator';
 import BottomTabNavigator from './navigation/TabNavigator';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const App = () => {
   const [logIn, setLogIn] = useState(true);
 
-  const _storeData = async () => {
-    try {
-      await AsyncStorage.setItem('setLogIn', setLogIn);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const storeData = async (value) => {
+  //   try {
+  //     const jsonLogin = JSON.stringify(value);
+  //     await AsyncStorage.setItem('@LoginFunc', jsonLogin);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+
+  // storeData(() => setLogIn(true));
 
   if (!logIn)
     return (
