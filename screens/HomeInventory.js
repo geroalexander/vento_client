@@ -15,10 +15,13 @@ const HomeInventory = ({ navigation }) => {
   const [addModal, setAddModal] = useState(false);
   const [currentItem, setCurrentItem] = useState({});
 
+  //SHOULD COME FROM USER>KITCHENID
+  const kitchenID = '60464f999e367ed24afd9557';
   useEffect(() => {
-    ApiClient.getKitchenInventory().then((data) =>
+    ApiClient.getKitchenInventory(kitchenID).then((data) =>
       setInventory(data.inventory),
     );
+    if (inventory.length === 0) setAddModal(true);
   }, []);
 
   const numCols = 3;

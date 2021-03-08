@@ -1,9 +1,9 @@
 import { REACT_APP_BASE_URL } from '@env';
 
-const userID = '60439995f7687f4485fef0c0'; //_id of admin
-const kitchenID = '604399f6f7687f4485fef0c2';
+// const userID = '60439995f7687f4485fef0c0'; //_id of admin
+// const kitchenID = '604399f6f7687f4485fef0c2';
 
-function getKitchenInventory() {
+function getKitchenInventory(kitchenID) {
   return fetch(`${REACT_APP_BASE_URL}/kitchen/${kitchenID}`).then((res) =>
     res.json(),
   );
@@ -15,7 +15,7 @@ function getSectionInformation(sectionID) {
   );
 }
 
-function getUserData() {
+function getUserData(userID) {
   return fetch(`${REACT_APP_BASE_URL}/user/${userID}`).then((res) =>
     res.json(),
   );
@@ -25,6 +25,41 @@ function getSection(sectionID) {
   return fetch(`${REACT_APP_BASE_URL}/section/${sectionID}`).then((res) =>
     res.json(),
   );
+}
+
+function createNewAdmin(email, name, password) {
+  const requestOptions = {
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+    body: JSON.stringify({ name, email, password }),
+  };
+  return fetch(`${REACT_APP_BASE_URL}/user`, requestOptions).then((res) =>
+    res.json(),
+  );
+}
+
+function createNewKitchen(userID, kitchenName) {
+  const requestOptions = {
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+    body: JSON.stringify({ userID, kitchenName }),
+  };
+  return fetch(
+    `${REACT_APP_BASE_URL}/kitchen/${userID}`,
+    requestOptions,
+  ).then((res) => res.json());
+}
+
+function createNewEmployee(name, email, password, kitchenID) {
+  const requestOptions = {
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+    body: JSON.stringify({ name, email, password, kitchenID }),
+  };
+  return fetch(
+    `${REACT_APP_BASE_URL}/user/kitchen`,
+    requestOptions,
+  ).then((res) => res.json());
 }
 
 function updateNotes(sectionID, notes) {
@@ -71,4 +106,7 @@ export default {
   addSection,
   addTask,
   getSection,
+  createNewAdmin,
+  createNewKitchen,
+  createNewEmployee,
 };

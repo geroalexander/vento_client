@@ -2,96 +2,98 @@ import React, { useState } from 'react';
 import { View, StyleSheet, SafeAreaView } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import { darkBlue } from '../StyleVars';
+import ApiClient from '../ApiClient';
 
 const Employee = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [restaurant, setRestaurant] = useState('');
+
+  const [user, setUser] = useState({});
+
+  const createUser = (email, name, password) => {
+    ApiClient.createNewEmployee(email, name, password).then((data) => {
+      setUser(data);
+    });
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <TextInput
-        theme={{
-          colors: {
-            placeholder: darkBlue,
-            text: darkBlue,
-            primary: darkBlue,
-          },
-        }}
-        mode="outlined"
-        label={'enter your email'}
-        underlineColor={darkBlue}
-        sectionColor={darkBlue}
-        onChangeText={(text) => setEamil(text)}
-        value={email}
-        // onSubmitEditing={() => {
-        //   if (!maxQuant) Alert.alert('You must fill in all fields!');
-        //   else {
-        //     handleTask(newTask, maxQuant);
-        //     hideModal();
-        //   }
-        // }}
-      />
-      <TextInput
-        style={styles.textBox}
-        theme={{
-          colors: {
-            placeholder: darkBlue,
-            text: darkBlue,
-            primary: darkBlue,
-          },
-        }}
-        mode="outlined"
-        label={'enter your name'}
-        underlineColor={darkBlue}
-        sectionColor={darkBlue}
-        onChangeText={(text) => setName(text)}
-        value={name}
-        // onSubmitEditing={() => {
-        //   if (newTask === '') Alert.alert('You must fill in both fields!');
-        //   else {
-        //     handleTask(newTask, maxQuant);
-        //     hideModal();
-        //   }
-        // }}
-      />
-      <TextInput
-        style={styles.textBox}
-        theme={{
-          colors: {
-            placeholder: darkBlue,
-            text: darkBlue,
-            primary: darkBlue,
-          },
-        }}
-        mode="outlined"
-        label={'create your password'}
-        underlineColor={darkBlue}
-        sectionColor={darkBlue}
-        onChangeText={(text) => setName(text)}
-        value={name}
-        // onSubmitEditing={() => {
-        //   if (newTask === '') Alert.alert('You must fill in both fields!');
-        //   else {
-        //     handleTask(newTask, maxQuant);
-        //     hideModal();
-        //   }
-        // }}
-      />
-      <View style={styles.btn}>
-        <Button
-          color={darkBlue}
-          mode="contained"
-          // onPress={() => {
-          //   if (newTask && maxQuant) {
-          //     handleTask(newTask, maxQuant);
-          //     hideModal();
-          //   } else {
-          //     Alert.alert('You must fill in both fields!');
-          //   }
-          // }}
-        >
-          Add Task
-        </Button>
+    <SafeAreaView style={styles.back}>
+      <View style={styles.container}>
+        <TextInput
+          theme={{
+            colors: {
+              placeholder: darkBlue,
+              text: darkBlue,
+              primary: darkBlue,
+            },
+          }}
+          mode="outlined"
+          label={'enter your email'}
+          underlineColor={darkBlue}
+          sectionColor={darkBlue}
+          onChangeText={(text) => setEmail(text)}
+          value={email}
+        />
+        <TextInput
+          style={styles.textBox}
+          theme={{
+            colors: {
+              placeholder: darkBlue,
+              text: darkBlue,
+              primary: darkBlue,
+            },
+          }}
+          mode="outlined"
+          label={'enter your name'}
+          underlineColor={darkBlue}
+          sectionColor={darkBlue}
+          onChangeText={(text) => setName(text)}
+          value={name}
+        />
+        <TextInput
+          style={styles.textBox}
+          theme={{
+            colors: {
+              placeholder: darkBlue,
+              text: darkBlue,
+              primary: darkBlue,
+            },
+          }}
+          mode="outlined"
+          label={'create your password'}
+          underlineColor={darkBlue}
+          sectionColor={darkBlue}
+          onChangeText={(text) => setPassword(text)}
+          value={password}
+          secureTextEntry={true}
+        />
+        <TextInput
+          style={styles.textBox}
+          theme={{
+            colors: {
+              placeholder: darkBlue,
+              text: darkBlue,
+              primary: darkBlue,
+            },
+          }}
+          mode="outlined"
+          label={'enter your restaurant or kitchen name'}
+          underlineColor={darkBlue}
+          sectionColor={darkBlue}
+          onChangeText={(text) => setRestaurant(text)}
+          value={restaurant}
+        />
+        <View style={styles.btn}>
+          <Button
+            color={darkBlue}
+            mode="contained"
+            onPress={() => createUser(email, name, password)}
+          >
+            Create Account!
+          </Button>
+        </View>
       </View>
     </SafeAreaView>
   );

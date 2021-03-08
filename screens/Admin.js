@@ -2,6 +2,8 @@ import { DrawerItemList } from '@react-navigation/drawer';
 import React, { useState } from 'react';
 import { View, StyleSheet, SafeAreaView, Alert } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
+import { useEffect } from 'react/cjs/react.development';
+import ApiClient from '../ApiClient';
 import { darkBlue } from '../StyleVars';
 
 const Admin = () => {
@@ -9,6 +11,19 @@ const Admin = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [restaurant, setRestaurant] = useState('');
+
+  const [user, setUser] = useState({});
+  const [kitchen, setKitchen] = useState({});
+
+  const createUser = (email, name, password) => {
+    ApiClient.createNewAdmin(email, name, password).then((data) => {
+      setUser(data);
+      ApiClient.createNewKitchen(user._id, restaurant).then((data) => {
+        setUser(data.updatedAdmin);
+        setKitchen(data.newKitchen);
+      });
+    });
+  };
 
   return (
     <SafeAreaView style={styles.back}>
@@ -27,13 +42,6 @@ const Admin = () => {
           sectionColor={darkBlue}
           onChangeText={(text) => setEmail(text)}
           value={email}
-          // onSubmitEditing={() => {
-          //   if (!maxQuant) Alert.alert('You must fill in all fields!');
-          //   else {
-          //     handleTask(newTask, maxQuant);
-          //     hideModal();
-          //   }
-          // }}
         />
         <TextInput
           style={styles.textBox}
@@ -50,13 +58,6 @@ const Admin = () => {
           sectionColor={darkBlue}
           onChangeText={(text) => setName(text)}
           value={name}
-          // onSubmitEditing={() => {
-          //   if (newTask === '') Alert.alert('You must fill in both fields!');
-          //   else {
-          //     handleTask(newTask, maxQuant);
-          //     hideModal();
-          //   }
-          // }}
         />
         <TextInput
           style={styles.textBox}
@@ -74,13 +75,6 @@ const Admin = () => {
           onChangeText={(text) => setPassword(text)}
           value={password}
           secureTextEntry={true}
-          // onSubmitEditing={() => {
-          //   if (newTask === '') Alert.alert('You must fill in both fields!');
-          //   else {
-          //     handleTask(newTask, maxQuant);
-          //     hideModal();
-          //   }
-          // }}
         />
         <TextInput
           style={styles.textBox}
@@ -97,40 +91,15 @@ const Admin = () => {
           sectionColor={darkBlue}
           onChangeText={(text) => setRestaurant(text)}
           value={restaurant}
-          // onSubmitEditing={() => {
-          //   if (
-          //     email === '' ||
-          //     name === '' ||
-          //     password === '' ||
-          //     restaurant === ''
-          //   ) {
-          //     Alert.alert('You must fill in both fields!');
-          //   } else {
-          //     setLogIn(true);
-          //   }
-          // }}
         />
         <View style={styles.btn}>
-          <DrillDown.Consumer>
-            <Button
-              color={darkBlue}
-              mode="contained"
-              onPress={() => {
-                if (
-                  email === '' ||
-                  name === '' ||
-                  password === '' ||
-                  restaurant === ''
-                ) {
-                  Alert.alert('You must fill in both fields!');
-                } else {
-                  value(true);
-                }
-              }}
-            >
-              Create Account!
-            </Button>
-          </DrillDown.Consumer>
+          <Button
+            color={darkBlue}
+            mode="contained"
+            onPress={() => createUser(email, name, password)}
+          >
+            Create Account!
+          </Button>
         </View>
       </View>
     </SafeAreaView>

@@ -37,6 +37,7 @@ const HomeTasks = () => {
 
       // console.log('secID.......', secID);
     });
+    if (data.length === 0) setSectionModal(true);
   }, []);
 
   const handleSection = (newSection) => {
@@ -88,12 +89,11 @@ const HomeTasks = () => {
             onChangeTab={(tab) => {
               setSecID(tab.ref.props.children.props.section._id);
             }}
-            style={styles.tabs}
             tabsContainerStyle={styles.tabs}
             renderTabBar={() => (
               <ScrollableTab
-                style={styles.tabs}
-                // tabsContainerStyle={styles.tabs}
+              // style={styles.tabs}
+              // tabsContainerStyle={styles.tabs}
               />
             )}
           >
@@ -165,6 +165,17 @@ const styles = StyleSheet.create({
   fab: {
     margin: 10,
     color: 'white',
+  },
+  container: {
+    backgroundColor: '#fff',
+    opacity: 1,
+    borderRadius: 7,
+    padding: 20,
+    width: '90%',
+    height: 250,
+    justifyContent: 'space-between',
+    paddingVertical: 45,
+    elevation: 20,
   },
 });
 

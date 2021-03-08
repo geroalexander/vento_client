@@ -4,19 +4,24 @@ import { AppRegistry } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { LogInStack } from './navigation/StackNavigator';
 import BottomTabNavigator from './navigation/TabNavigator';
+import { AsyncStorage } from 'react-native';
 
 const App = () => {
-  const DrillDown = React.createContext();
-
   const [logIn, setLogIn] = useState(true);
+
+  const _storeData = async () => {
+    try {
+      await AsyncStorage.setItem('setLogIn', setLogIn);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (!logIn)
     return (
-      <DrillDown.Provider value={() => setLogIn}>
-        <NavigationContainer>
-          <LogInStack />
-        </NavigationContainer>
-      </DrillDown.Provider>
+      <NavigationContainer>
+        <LogInStack />
+      </NavigationContainer>
     );
   else {
     return (
