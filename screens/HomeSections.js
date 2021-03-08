@@ -48,8 +48,13 @@ const HomeTasks = ({ navigation }) => {
   };
 
   const handleTask = (newTask, maxQuant) => {
+    // console.log('--------------', newTask);
+    // console.log('--------------', maxQuant);
+    // console.log('--------------', secID);
+    // console.log('data-----------------------------------', data);
+    // console.log('---------------------------------------');
     ApiClient.addTask(secID, newTask, maxQuant).then((res) => {
-      setData((oldSections) => [...oldSections, res]);
+      setData((oldSections) => [...oldSections, res.tasks]);
     });
   };
 
@@ -73,6 +78,7 @@ const HomeTasks = ({ navigation }) => {
           <Tabs
             onChangeTab={(tab) => {
               setSecID(tab.ref.props.children.props.section._id);
+              // console.log(tab.ref.props.children.props);
             }}
             style={styles.tabs}
             tabsContainerStyle={styles.tabs}

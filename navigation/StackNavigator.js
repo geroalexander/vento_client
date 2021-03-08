@@ -1,13 +1,15 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { MaterialIcons } from '@expo/vector-icons';
 import { darkBlue } from '../StyleVars';
 
 import HomeSections from '../screens/HomeSections';
 import HomeInventory from '../screens/HomeInventory';
 import HomeSetting from '../screens/HomeSetting';
 import HomeUser from '../screens/HomeUser';
+import Select from '../screens/Select';
+import Admin from '../screens/Admin';
+import Employee from '../screens/Employee';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +22,28 @@ const screenOptionStyle = {
   justifyContent: 'center',
   headerTintColor: '#fff',
   headerBackTitle: 'Back',
+};
+
+const LogInStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Employee or Owner"
+        component={Select}
+        options={{ headerShow: false }}
+      />
+      <Stack.Screen
+        name="Admin"
+        component={Admin}
+        options={{ headerShow: false }}
+      />
+      <Stack.Screen
+        name="Employee"
+        component={Employee}
+        options={{ headerShow: false }}
+      />
+    </Stack.Navigator>
+  );
 };
 
 const SectionsStackNavigator = () => {
@@ -75,4 +99,5 @@ export {
   InventoryStackNavigator,
   UserStackNavigator,
   SettingStackNavigator,
+  LogInStack,
 };

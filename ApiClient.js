@@ -21,6 +21,12 @@ function getUserData() {
   );
 }
 
+function getSection(sectionID) {
+  return fetch(`${REACT_APP_BASE_URL}/section/${sectionID}`).then((res) =>
+    res.json(),
+  );
+}
+
 function updateNotes(sectionID, notes) {
   const requestOptions = {
     method: 'PUT',
@@ -64,4 +70,5 @@ export default {
   updateNotes,
   addSection,
   addTask,
+  getSection,
 };

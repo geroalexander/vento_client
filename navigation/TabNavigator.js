@@ -50,7 +50,7 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="User"
+        name="Team"
         component={UserStackNavigator}
         options={{
           tabBarIcon: ({ color }) => {
