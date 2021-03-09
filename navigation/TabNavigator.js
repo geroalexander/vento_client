@@ -1,5 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import LoadingAnimation from '../Loader';
+
 import { darkBlue } from '../StyleVars';
 
 import {
@@ -20,7 +22,7 @@ const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Sections"
+      initialRouteName="Settings"
       tabBarOptions={{
         activeTintColor: darkBlue,
       }}

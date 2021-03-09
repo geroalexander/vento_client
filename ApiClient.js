@@ -1,6 +1,6 @@
 import { REACT_APP_BASE_URL } from '@env';
 
-// const userID = '60439995f7687f4485fef0c0'; //_id of admin
+// const userID = '6046bae882b506db2b891c02'; //_id of admin
 // const kitchenID = '604399f6f7687f4485fef0c2';
 
 function getKitchenInventory(kitchenID) {
@@ -53,7 +53,7 @@ function createNewKitchen(userID, kitchenName) {
 function createNewEmployee(email, name, password, kitchenID) {
   const requestOptions = {
     headers: { 'Content-Type': 'application/json' },
-    method: 'POST',
+    method: 'PUT',
     body: JSON.stringify({ email, name, password, kitchenID }),
   };
   return fetch(
@@ -98,6 +98,18 @@ function addTask(sectionID, taskName, maxQuantity) {
   ).then((res) => res.json());
 }
 
+function addInventoryItem(itemName, itemQuantity, kitchenID) {
+  const requestOptions = {
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+    body: JSON.stringify({ itemName, itemQuantity, kitchenID }),
+  };
+  return fetch(
+    `${REACT_APP_BASE_URL}/inventory/${kitchenID}`,
+    requestOptions,
+  ).then((res) => res.json());
+}
+
 export default {
   getKitchenInventory,
   getUserData,
@@ -109,4 +121,5 @@ export default {
   createNewAdmin,
   createNewKitchen,
   createNewEmployee,
+  addInventoryItem,
 };

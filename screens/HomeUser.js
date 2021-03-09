@@ -1,14 +1,10 @@
 import * as React from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
-import {
-  Appbar,
-  DefaultTheme,
-  FAB,
-  Portal,
-  Provider,
-} from 'react-native-paper';
+import { useState } from 'react';
+import { View, StyleSheet, FlatList, Modal } from 'react-native';
+import { Appbar } from 'react-native-paper';
 import { darkBlue } from '../StyleVars';
-import UserProfile from '../components/users/user-profile';
+import UserList from '../components/users/user-list';
+import AddUserModal from '../components/users/add-user-modal';
 
 const team = [
   {
@@ -38,13 +34,23 @@ const team = [
 ];
 
 const HomeUser = () => {
+  const editUser = () => {
+    console.log('editing');
+  };
+
+  const addUser = () => {
+    console.log('adduser');
+  };
+
+  const [addUserModal, setAddUserModal] = useState(false);
+
   return (
     <>
       <Appbar.Header style={styles.header}>
         <Appbar.Content title="Team" />
         <Appbar.Action
           icon="account-plus"
-          onPress={() => console.log('hi')}
+          onPress={() => setAddUserModal(true)}
           size={30}
         />
       </Appbar.Header>
@@ -54,15 +60,29 @@ const HomeUser = () => {
           data={team}
           keyExtractor={(item) => item._id}
           renderItem={({ item }) => (
-            <UserProfile
+            <UserList
+              userID={item._id}
+              sectionIDs={[item.sectionID]}
               userName={item.name}
-              sections={item.sectionID}
-              onPress={() => {}}
+              editUser={editUser}
             />
           )}
-          numColumns={2}
+          // numColumns={2}
         />
       </View>
+      <Modal
+        animationType="none"
+        transparent={true}
+        visible={addUserModal}
+        onRequestClose={() => setAddUserModal(false)}
+      >
+        <View style={styles.userModal}>
+          <AddUserModal
+            hideModal={() => setAddUserModal(false)}
+            editUserSections={addUser}
+          />
+        </View>
+      </Modal>
     </>
   );
 };
@@ -74,6 +94,12 @@ const styles = StyleSheet.create({
   flatlist: {
     flex: 1,
     margin: 10,
+  },
+  userModal: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
 });
 

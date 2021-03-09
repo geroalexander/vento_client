@@ -5,7 +5,6 @@ import { darkBlue } from '../StyleVars';
 
 import HomeSections from '../screens/HomeSections';
 import HomeInventory from '../screens/HomeInventory';
-import HomeSetting from '../screens/HomeSetting';
 import HomeUser from '../screens/HomeUser';
 import Select from '../screens/Select';
 import Admin from '../screens/Admin';
@@ -87,7 +86,7 @@ const UserStackNavigator = () => {
 //     <Stack.Navigator screenOptions={screenOptionStyle}>
 //       <Stack.Screen
 //         name="Setting"
-//         component={HomeSetting}
+//         component={LoadingAnimation}
 //         options={{ headerShown: false }}
 //       />
 //     </Stack.Navigator>

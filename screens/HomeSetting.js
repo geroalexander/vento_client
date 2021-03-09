@@ -1,12 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
+import LoadingAnimation from '../Loader';
 
 const HomeSetting = () => {
-  return (
-    <View style={styles.center}>
-      <Text>This is the Setting screen</Text>
-    </View>
-  );
+  return <LoadingAnimation />;
 };
 
 const styles = StyleSheet.create({

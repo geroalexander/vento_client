@@ -11,12 +11,8 @@ import { darkBlue } from '../../StyleVars';
 import { FontAwesome } from '@expo/vector-icons';
 import UserModal from './user-modal';
 
-const UserProfile = ({ userName, sections }) => {
+const UserList = ({ userName, userID, sectionIDs, editUser }) => {
   const [userModal, setUserModal] = useState(false);
-
-  const editUser = () => {
-    console.log('editing');
-  };
 
   return (
     <>
@@ -43,8 +39,10 @@ const UserProfile = ({ userName, sections }) => {
         <View style={styles.userModal}>
           <UserModal
             hideModal={() => setUserModal(false)}
-            editUser={editUser}
-            user={userName}
+            editUserSections={editUser}
+            userName={userName}
+            userID={userID}
+            sectionIDs={sectionIDs}
           />
         </View>
       </Modal>
@@ -79,4 +77,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default UserProfile;
+export default UserList;

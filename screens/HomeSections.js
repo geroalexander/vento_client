@@ -3,13 +3,7 @@ import ApiClient from '../ApiClient';
 import { Component, useState } from 'react';
 import { View, Button, Modal, Text, FlatList, StyleSheet } from 'react-native';
 import SectionTasks from '../components/sections/section-tasks';
-import {
-  Appbar,
-  DefaultTheme,
-  FAB,
-  Portal,
-  Provider,
-} from 'react-native-paper';
+import { Appbar } from 'react-native-paper';
 import { darkBlue, midBlue } from '../StyleVars';
 import { Container, Tab, Tabs, ScrollableTab } from 'native-base';
 import AddSectionModal from '../components/sections/add_section_modal';
@@ -25,17 +19,14 @@ const HomeTasks = () => {
 
   useEffect(() => {
     setData([]);
-    ApiClient.getUserData().then((user) => {
+    ApiClient.getUserData('6046bae882b506db2b891c02').then((user) => {
       setUser(user);
       user.sectionID.forEach((section) => {
         ApiClient.getSectionInformation(section).then((newSection) =>
           setData((oldSections) => [...oldSections, newSection]),
         );
       });
-      // console.log('data---->', data);
       if (data) setSecID(data[0]._id);
-
-      // console.log('secID.......', secID);
     });
     if (data.length === 0) setSectionModal(true);
   }, []);
@@ -48,25 +39,18 @@ const HomeTasks = () => {
   };
 
   const handleTask = (newTask, maxQuant) => {
-    console.log('secID', secID);
     ApiClient.addTask(secID, newTask, maxQuant).then((res) => {
-      // console.log('-------->THIS IS RES!!!!!!!!!!!!!', res);
       const dataCopy = [...data];
       const updatedData = dataCopy.map((s) => {
         if (s._id === secID) {
-          // console.log('s---->', s);
-
           s.tasks = res;
         }
-        // console.log('s---->', s);
 
         return s;
       });
       setData(updatedData);
-      // console.log('---------data', data);
     });
   };
-  // console.log('secID---->', secID);
 
   if (data) {
     return (
@@ -92,8 +76,8 @@ const HomeTasks = () => {
             tabsContainerStyle={styles.tabs}
             renderTabBar={() => (
               <ScrollableTab
-              // style={styles.tabs}
-              // tabsContainerStyle={styles.tabs}
+                style={styles.tabs}
+                // tabsContainerStyle={styles.tabs}
               />
             )}
           >

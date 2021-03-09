@@ -14,7 +14,7 @@ const StockAddModal = ({ hideModal, addItem }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={[styles.center, styles.slider]}>
-        <Text style={[styles.quant, styles.textColor]}>Add an item</Text>
+        <Text style={[styles.quant, styles.text]}>Add an item</Text>
         <TextInput
           theme={{
             colors: {
@@ -24,7 +24,7 @@ const StockAddModal = ({ hideModal, addItem }) => {
             },
           }}
           mode="outlined"
-          style={[styles.textInput, styles.textColor]}
+          style={[styles.textInput, styles.text]}
           label={'Enter an item'}
           underlineColor={darkBlue}
           sectionColor={darkBlue}
@@ -35,7 +35,7 @@ const StockAddModal = ({ hideModal, addItem }) => {
             hideModal();
           }}
         />
-        <Text style={[styles.quant, styles.textColor]}>{quantity + '%'}</Text>
+        <Text style={[styles.quant, styles.text]}>{quantity + '%'}</Text>
 
         <View style={styles.row}>
           <Pressable
@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   quant: {
+    fontFamily: 'ChakraPetch_300Light_Italic',
     fontSize: 40,
     fontWeight: 'bold',
   },
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
   slider: {
     width: '70%',
   },
-  textColor: {
+  text: {
     color: darkBlue,
   },
   row: {

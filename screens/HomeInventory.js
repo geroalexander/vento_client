@@ -16,7 +16,7 @@ const HomeInventory = ({ navigation }) => {
   const [currentItem, setCurrentItem] = useState({});
 
   //SHOULD COME FROM USER>KITCHENID
-  const kitchenID = '60464f999e367ed24afd9557';
+  const kitchenID = '6046baec82b506db2b891c04';
   useEffect(() => {
     ApiClient.getKitchenInventory(kitchenID).then((data) =>
       setInventory(data.inventory),
@@ -34,6 +34,9 @@ const HomeInventory = ({ navigation }) => {
         obj.itemQuantity = val;
       }
     });
+    // ApiClient.addInventoryItem(name, val, kitchenID).then((data) =>
+    //   setInventory(data.inventory),
+    // );
   };
 
   // adjust to work with _id
