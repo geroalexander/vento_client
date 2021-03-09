@@ -28,8 +28,10 @@ import {
   OpenSans_800ExtraBold_Italic,
 } from '@expo-google-fonts/open-sans';
 
+console.disableYellowBox = true;
+
 const App = () => {
-  const [logIn, setLogIn] = useState(true);
+  const [logIn, setLogIn] = useState(false);
 
   let [fontsLoaded] = useFonts({
     ChakraPetch_300Light,

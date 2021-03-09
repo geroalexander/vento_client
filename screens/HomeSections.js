@@ -28,7 +28,7 @@ const HomeTasks = () => {
       });
       if (data) setSecID(data[0]._id);
     });
-    if (data.length === 0) setSectionModal(true);
+    // if (data.length === 0) setSectionModal(true);
   }, []);
 
   const handleSection = (newSection) => {

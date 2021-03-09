@@ -9,6 +9,7 @@ import HomeUser from '../screens/HomeUser';
 import Select from '../screens/Select';
 import Admin from '../screens/Admin';
 import Employee from '../screens/Employee';
+import LogIn from '../screens/LogIn';
 
 const Stack = createStackNavigator();
 
@@ -39,6 +40,11 @@ const LogInStack = () => {
       <Stack.Screen
         name="Employee"
         component={Employee}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="LogIn"
+        component={LogIn}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

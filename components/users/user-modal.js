@@ -19,16 +19,25 @@ const UserModal = ({
   editUserSections,
 }) => {
   const section = [
-    { _id: '6045ef40bbabddad9f882ebe', sectionName: 'Grill' },
-    { _id: '6045ef5bbbabddad9f882ebf', sectionName: 'Fryer' },
-    { _id: '6045ef5bbbabddad9f882efe', sectionName: 'Salad' },
-    { _id: '6045ef5bbbabddad9f872efe', sectionName: 'Cold' },
+    { _id: '6045ef40bbabddad9f882ebe', sectionName: 'Rotisseur' },
+    { _id: '6045ef5bbbabddad9f882ebf', sectionName: 'Patissier' },
+    { _id: '6045ef5bbbabddad9f882efe', sectionName: 'Entremetier' },
+    { _id: '6045ef5bbbabddad9f872efe', sectionName: 'Salad' },
   ];
 
   // const [isEnabled, setIsEnabled] = useState(false);
   // const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
-  const [select, setSelect] = useState([]);
+  const [select, setSelect] = useState([
+    {
+      _id: '6045ef5bbbabddad9f882ebf',
+      sectionName: 'Patissier',
+    },
+    {
+      _id: '6045ef5bbbabddad9f882efe',
+      sectionName: 'Entremetier',
+    },
+  ]);
 
   const handleUpdate = useCallback(
     (sec, newValue) => {
@@ -42,11 +51,6 @@ const UserModal = ({
     },
     [select],
   );
-
-  console.log(select);
-  console.log(userName);
-  console.log(userID);
-  console.log(sectionIDs);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -96,7 +100,7 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     padding: 20,
     width: '90%',
-    height: 250,
+    height: 350,
     justifyContent: 'space-between',
     paddingVertical: 45,
     elevation: 20,
@@ -108,14 +112,19 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: darkBlue,
   },
   sectionCheck: {
     flexDirection: 'row',
     alignItems: 'center',
+    padding: 10,
   },
   flatlist: {
+    flexDirection: 'row',
+    marginTop: 30,
     width: '90%',
     justifyContent: 'space-between',
+    paddingHorizontal: 20,
   },
 });
 

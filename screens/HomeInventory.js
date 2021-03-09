@@ -9,6 +9,32 @@ import InventoryCircleEmpty from '../components/inventory/inventory_circle_empty
 import EditInventoryModal from '../components/inventory/edit_inventory_modal';
 import AddInventoryModal from '../components/inventory/add_inventory_modal';
 
+// consRicet INVENTORY = [
+//   { itemName: 'Beets', quantity: 10 },
+//   { itemName: 'Oranges', quantity: 10 },
+//   { itemName: 'Pinapples', quantity: 10 },
+//   { itemName: 'MushRooms', quantity: 100 },
+//   { itemName: 'Beef', quantity: 100 },
+//   { itemName: 'Apples', quantity: 20 },
+//   { itemName: 'Carrots', quantity: 20 },
+//   { itemName: 'Leek', quantity: 20 },
+//   { itemName: 'Onions', quantity: 20 },
+//   { itemName: 'Garlic', quantity: 20 },
+//   { itemName: 'Peas', quantity: 20 },
+//   { itemName: 'Gambas', quantity: 20 },
+//   { itemName: 'Tomatoes', quantity: 20 },
+//   { itemName: 'Curry', quantity: 20 },
+//   { itemName: 'Rice', quantity: 20 },
+//   { itemName: 'Noodles', quantity: 20 },
+//   { itemName: 'Cauliflower', quantity: 20 },
+//   { itemName: 'Chickpeas', quantity: 20 },
+//   { itemName: 'Something', quantity: 20 },
+//   { itemName: 'Else', quantity: 20 },
+//   { itemName: 'Aswell', quantity: 20 },
+//   { itemName: 'OMG', quantity: 20 },
+// { itemName: 'Running', quantity: 20 },
+// ];
+
 const HomeInventory = ({ navigation }) => {
   const [inventory, setInventory] = useState([]);
   const [editModal, setEditModal] = useState(false);
@@ -21,7 +47,6 @@ const HomeInventory = ({ navigation }) => {
     ApiClient.getKitchenInventory(kitchenID).then((data) =>
       setInventory(data.inventory),
     );
-    if (inventory.length === 0) setAddModal(true);
   }, []);
 
   const numCols = 3;

@@ -3,7 +3,7 @@ import { View, StyleSheet, SafeAreaView, Text } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import { darkBlue } from '../StyleVars';
 
-const LogIn = ({ navigation }) => {
+const Select = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.back}>
       <View style={styles.container}>
@@ -14,7 +14,7 @@ const LogIn = ({ navigation }) => {
           mode="contained"
           onPress={() => navigation.navigate('Admin')}
         >
-          Proceed as Admin
+          Register as Admin
         </Button>
         <Button
           style={styles.btn}
@@ -22,7 +22,15 @@ const LogIn = ({ navigation }) => {
           mode="contained"
           onPress={() => navigation.navigate('Employee')}
         >
-          Proceed as Employee
+          Register as Employee
+        </Button>
+        <Button
+          style={styles.btn}
+          color={darkBlue}
+          mode="contained"
+          onPress={() => navigation.navigate('LogIn')}
+        >
+          Log In
         </Button>
       </View>
     </SafeAreaView>
@@ -59,4 +67,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LogIn;
+export default Select;
