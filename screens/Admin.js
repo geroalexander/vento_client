@@ -27,15 +27,6 @@ const Admin = () => {
     });
   };
 
-  // const getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem('@LoginFunc');
-  //     return jsonValue != null ? JSON.parse(jsonValue) : null;
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
   return (
     <SafeAreaView style={styles.back}>
       <View style={styles.container}>

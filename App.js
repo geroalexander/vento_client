@@ -31,7 +31,7 @@ import {
 console.disableYellowBox = true;
 
 const App = () => {
-  const [logIn, setLogIn] = useState(false);
+  const [logIn, setLogIn] = useState(true);
 
   let [fontsLoaded] = useFonts({
     ChakraPetch_300Light,

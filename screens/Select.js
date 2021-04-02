@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, StyleSheet, SafeAreaView, Text } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import { darkBlue } from '../StyleVars';
 
 const Select = ({ navigation }) => {

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, SafeAreaView, Text, Image } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
-import { useEffect } from 'react/cjs/react.development';
 import ApiClient from '../ApiClient';
 import { darkBlue } from '../StyleVars';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import logo from '../assets/logo.png';
 
 const Admin = () => {
@@ -26,15 +24,6 @@ const Admin = () => {
       });
     });
   };
-
-  // const getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem('@LoginFunc');
-  //     return jsonValue != null ? JSON.parse(jsonValue) : null;
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
 
   return (
     <SafeAreaView style={styles.back}>

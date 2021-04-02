@@ -15,65 +15,6 @@ import UserList from '../components/users/user-list';
 import AddUserModal from '../components/users/add-user-modal';
 import * as ImagePicker from 'expo-image-picker';
 import { FontAwesome } from '@expo/vector-icons';
-import willem from '../assets/will.png';
-import ale from '../assets/ale.png';
-import jon from '../assets/jon.png';
-import erik from '../assets/erik.png';
-
-const team = [
-  {
-    _id: '2314312341341342',
-    name: 'Johnny',
-    email: 'george@example.com',
-    password: '12341234',
-    kitchenID: '604399f6f7687f4485fef0c2',
-    sectionID: ['60450bc88bfaf58c227e4f56', '604510c58bfaf58c227e4f57'],
-    img: jon,
-  },
-  {
-    _id: '8769876987698768976',
-    name: 'Maxi',
-    email: 'maxi@example.com',
-    password: '12341234',
-    kitchenID: '604399f6f7687f4485fef0c2',
-    sectionID: ['6045116c8bfaf58c227e4f59', '604510c58bfaf58c227e4f57'],
-    img: willem,
-  },
-  {
-    _id: '7865876587658765',
-    name: 'Ale',
-    email: 'ale@example.com',
-    password: '12341234',
-    kitchenID: '604399f6f7687f4485fef0c2',
-    sectionID: ['604511798bfaf58c227e4f5a'],
-    img: ale,
-  },
-  {
-    _id: '786587afaf7658765',
-    name: 'Otto',
-    email: 'otto@example.com',
-    password: '12341234',
-    kitchenID: '604399f6f7687f4485fef0c2',
-    sectionID: ['604511798bfaf58c227e4f5a'],
-    img: erik,
-  },
-  // {
-  //   _id: '121212142435',
-  //   name: 'Justus',
-  //   email: 'ale@example.com',
-  //   password: '12341234',
-  //   kitchenID: '604399f6f7687f4485fef0c2',
-  //   sectionID: ['604511798bfaf58c227e4f5a'],
-  // },
-  // {
-  //   _id: '523526262323',
-  //   name: 'Freddie',
-  //   email: 'ale@example.com',
-  //   password: '12341234',
-  //   kitchenID: '604399f6f7687f4485fef0c2',
-  //   sectionID: ['604511798bfaf58c227e4f5a'],
-  // },
-];
 
 const HomeUser = () => {
   const [image, setImage] = useState(null);
@@ -120,11 +61,11 @@ const HomeUser = () => {
     <>
       <Appbar.Header style={styles.header}>
         <Appbar.Content title="Team" />
-        <Appbar.Action
+        {/* <Appbar.Action
           icon="account-plus"
           onPress={() => setAddUserModal(true)}
           size={30}
-        />
+        /> */}
       </Appbar.Header>
       <View style={styles.user}>
         <TouchableOpacity onPress={pickImage}>

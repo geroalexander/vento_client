@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  Image,
-  Text,
-  KeyboardAvoidingView,
-} from 'react-native';
+import { View, StyleSheet, SafeAreaView, Image, Text } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import { darkBlue } from '../StyleVars';
 import ApiClient from '../ApiClient';
@@ -18,13 +11,7 @@ const Employee = () => {
   const [password, setPassword] = useState('');
   const [kitchenID, setKitchenID] = useState('');
 
-  const [user, setUser] = useState({});
-
   const createUser = (email, name, password, kitchenID) => {
-    console.log('name----->', name);
-    console.log('email----->', email);
-    console.log('password----->', password);
-    console.log('kitchenID----->', kitchenID);
     ApiClient.createNewEmployee(email, name, password, kitchenID).then(
       (data) => {
         console.log(data);

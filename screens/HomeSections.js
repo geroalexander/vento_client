@@ -28,7 +28,6 @@ const HomeTasks = () => {
       });
       if (data) setSecID(data[0]._id);
     });
-    // if (data.length === 0) setSectionModal(true);
   }, []);
 
   const handleSection = (newSection) => {
@@ -74,16 +73,9 @@ const HomeTasks = () => {
               setSecID(tab.ref.props.children.props.section._id);
             }}
             tabsContainerStyle={styles.tabs}
-            renderTabBar={() => (
-              <ScrollableTab
-                style={styles.tabs}
-                // tabsContainerStyle={styles.tabs}
-              />
-            )}
+            renderTabBar={() => <ScrollableTab style={styles.tabs} />}
           >
             {data.map((section) => {
-              // console.log('section---->', section);
-
               return (
                 <Tab
                   key={section._id}
